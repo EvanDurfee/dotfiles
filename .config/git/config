@@ -18,3 +18,5 @@
 	editor = nano -b -r 72
 [init]
 	defaultBranch = master
+[pull]
+	ff = only
