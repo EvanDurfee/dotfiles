@@ -1,0 +1,5 @@
+set linenumbers
+set guidestripe 80
+set tabsize 4
+set constantshow
+

@@ -1,0 +1,18 @@
+## Common aliases
+
+# Enable colors
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# saner defaults
+#alias cp="cp -i"                                                # Confirm before overwriting something
+#alias df='df -h'                                                # Human-readable sizes
+#alias free='free -m'                                            # Show sizes in MB
+
+alias userctl='systemctl --user'
+
+alias cfg='/bin/git --git-dir=$HOME/.home/ --work-tree=$HOME'
