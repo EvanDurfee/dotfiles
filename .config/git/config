@@ -1,0 +1,20 @@
+[user]
+	email = evanmdurfee@gmail.com
+	name = Evan Durfee
+[diff]
+	tool = kdiff3
+[merge]
+	tool = kdiff3
+[difftool]
+	prompt = false
+[alias]
+	hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
+	st = status
+[color]
+	ui = auto
+[core]
+	autocrlf = input
+	pager = less -FR
+	editor = nano -b -r 72
+[init]
+	defaultBranch = master

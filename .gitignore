@@ -12,6 +12,7 @@
 /.config/*
 # whitelist individual configs
 !/.config/dircolors
+!/.config/git
 !/.config/less
 !/.config/npm
 !/.config/profile
