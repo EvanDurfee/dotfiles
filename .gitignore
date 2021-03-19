@@ -1,0 +1,27 @@
+# Ignore everything in the root (but not subdirs)
+/*
+!/.gitignore
+# Add shell stuff
+!/.bash_profile
+!/.bashrc
+!/.bash_aliases
+!/.zshenv
+!/.profile
+# whitelist configs dir, but blacklist contents
+!/.config/
+/.config/*
+# whitelist individual configs
+!/.config/dircolors
+!/.config/less
+!/.config/npm
+!/.config/profile
+!/.config/profile/overrides
+!/.config/readline
+!/.config/vim
+!/.config/wget
+!/.config/zsh
+/.config/zsh/.zcompdump
+/.config/zsh/znap-repos
+/.config/zsh/secrets.zsh
+/.config/zsh/secrets
+

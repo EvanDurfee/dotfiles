@@ -1,1 +1,1 @@
-/home/evan/.config/profile/common.profile
+.config/profile/common
