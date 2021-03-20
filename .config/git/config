@@ -14,9 +14,17 @@
 	ui = auto
 [core]
 	autocrlf = input
-	pager = less -FR
+	pager = delta
 	editor = nano -b -r 72
+#	pager = less -FR
 [init]
 	defaultBranch = master
 [pull]
 	ff = only
+[delta]
+	features = evan
+	line-numbers = true
+	side-by-side = false
+[delta "evan"]
+	minus-style = red bold
+	plus-style = green bold
