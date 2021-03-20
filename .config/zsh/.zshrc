@@ -140,6 +140,9 @@ znap source zsh-users/zsh-autosuggestions
 # Adds clipboard functions (pbcopy, pbpaste, and clip) for interacting with system clipboard (works for Windows, Mac, X, Wayland...).
 znap source zpm-zsh/clipboard
 
+# Adds automatic enviornment loading and unloading (including functions, etc.)
+znap source https://github.com/Tarrasch/zsh-autoenv
+
 # DISABLED: serious errors with parsing some flags (e.g. interprets --verbose as --shred).
 # Adds a prompt to rm when deleting 3+ files, and allows recycling instead of de-indexing with the -c flag
 # add ~/.rm_recycle_home to default to recyling any files rm'd in your home
