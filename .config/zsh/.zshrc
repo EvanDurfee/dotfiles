@@ -14,10 +14,12 @@ fi
 
 # Set the location for our zsh plugin downloads
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/znap
+# automatically compile loaded zsh files
+zstyle ':znap:*' auto-compile yes
 # Load znap for plugin management
 source "$HOME"/.local/src/zsh-snap/znap.zsh
 
-# Load the actualy prompt
+# Load the actual prompt
 znap source romkatv/powerlevel10k
 
 # Prepare the LS_COLORS variable (clear the cache if changing the config)
