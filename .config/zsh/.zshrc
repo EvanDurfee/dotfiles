@@ -35,7 +35,7 @@ setopt rcexpandparam                                            # Array expansio
 setopt nocheckjobs                                              # Don't warn about running processes when exiting
 setopt numericglobsort                                          # Sort filenames numerically when it makes sense
 setopt nobeep                                                   # No beep
-setopt autocd                                                   # if only directory path is entered, cd there.
+
 
 WORDCHARS=${WORDCHARS//[\/;]}                                   # Don't consider / or ; as wordchars
 autoload -U select-word-style
@@ -52,19 +52,31 @@ zstyle ':completion:*' cache-path $ZDOTDIR/cache
 zstyle ':completion:*' menu select                              # enable menu style completions
 
 # History
-setopt appendhistory                                            # append history instead of overwriting
-setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
-setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt append_history                                           # append history instead of overwriting
+setopt extended_history                                         # save timestamp and duration to history
+# setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
+setopt inc_append_history_time                                  # Like inc_append_history, but saves after the command completes so that execution time is correct with extended history
+setopt hist_reduce_blanks                                       # remove superfluous blanks
+setopt hist_ignore_all_dups                                     # If a new command is a duplicate, remove the older one
+
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 if [ ! -f "$HISTFILE" ]; then
 	mkdir -p "$HISTFILE:h" && touch "$HISTFILE" && chmod 600 "$HISTFILE"
 fi
 HISTSIZE=10000
 SAVEHIST=10000
+
+# Changing Directories
+setopt auto_cd                                                  # if only directory path is entered, cd there.
 # Sets cd to behave like pushd (allows cd -[n] or cd +[n] to navigate the stack)
 # Use cd -<TAB> or cd +<TAB> to show the stack
+setopt auto_pushd                                               # Make cd push the old directory onto the dir stack
+setopt pushd_silent                                             # Do not print the directory stack after pushd or popd
+setopt pushd_to_home                                            # pushd with no args acts like pushd $HOME
+setopt pushd_ignore_dups                                        # Don't push multiple copies of the same dir
+setopt pushd_minus                                              # Swap meaning of + and - (- will index from the top of the stack, + from the bottom)
 DIRSTACKSIZE=20
-setopt autopushd pushdsilent pushdtohome pushdignoredups pushdminus
+
 
 
 
@@ -151,18 +163,9 @@ znap source https://github.com/Tarrasch/zsh-autoenv
 # znap source MikeDacre/careful_rm
 # touch ~/.rm_recycle_home
 
-# Adds fzf integration zsh history search (ctrl+r)
-# znap source joshskidmore/zsh-fzf-history-search
-# It's so small, I've copied the content here:
-fzf_history_seach() {
-	BUFFER=$(history -t '%Y-%m-%d %H:%M:%S' 0 | grep -v 1969 | fzf +s +m -x --tac -e -q "$BUFFER" | awk '{print substr($0, index($0, $4))}')
-	zle end-of-line
-}
-
-autoload fzf_history_seach
-zle -N fzf_history_seach
-
-bindkey '^r' fzf_history_seach
+# Adds a function and widget for searching history with fuzzy matching
+znap source evandurfee/zsh-fzf-history-search
+bindkey '^r' fzf-history-search
 
 # TODO: how does this compare to fast-syntax-highlighting?
 # Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
