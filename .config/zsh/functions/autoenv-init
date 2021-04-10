@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+# Standard function opts
+emulate -L zsh
+setopt extended_glob warn_create_global typeset_silent \
+		no_short_loops rc_quotes no_auto_pushd
+
+local dir="${1:-$PWD}"
+local autoenv_file="$dir/${AUTOENV_FILE_ENTER:-autoenv.zsh}"
+local env_file="$dir/.env"
+_autoenv_debug "Initializing ${autoenv_file:t} and ${env_file:t} in $dir"
+if [ -f "$autoenv_file" ]; then
+	echo "Unable to init; file '$autoenv_file' already exists" >&2
+	return 1
+elif [ -f "$env_file" ]; then
+	echo "Unable to init; file '$env_file' already exists" >&2
+fi
+cat >"$autoenv_file" <<'EOF'
+local root="${autoenv_env_file:h}"
+if [[ $autoenv_event == 'enter' ]]; then
+	autoenv_source_parent
+	# Source a separate env file 
+	local env_file="$root"/.env
+	if [ ! -r "$env_file" ]; then
+		echo "File '$env_file' is not readable or does not exist" >&2
+		return 1
+	else
+		_autoenv_debug "Loading env file '$env_file'"
+		while read -r line; do
+			eval "autostash $line"
+		done < <(grep -E '^[^ \t#=]+=.+' "$env_file")
+	fi
+else
+fi
+EOF
+touch "$env_file"
+chmod 600 "$autoenv_file" "$env_file"

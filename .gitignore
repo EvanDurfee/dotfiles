@@ -21,9 +21,11 @@
 !/.config/vim
 !/.config/wget
 !/.config/zsh
-/.config/zsh/**.zwc
 /.config/zsh/.zcompdump
 /.config/zsh/cache
 /.config/zsh/secrets.zsh
 /.config/zsh/secrets
 /.config/zsh/znap-repos
+
+# Ignore compiled zsh
+*.zwc

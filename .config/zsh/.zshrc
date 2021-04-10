@@ -120,8 +120,7 @@ bindkey '^[[Z' undo                                             # Shift+tab undo
 
 
 ## Theming
-autoload -U compinit colors zcalc
-compinit -d
+autoload -U colors zcalc
 colors
 
 # Color man pages
@@ -136,17 +135,15 @@ export LESS=-R
 
 
 
-## Plugins section: Enable fish style features
+## Plugins section
 
 # Ideas:
-# fzf history integration (allows show history and ssearch with ctrl r)
 # zsh-edit (adds hotkeys for going forwar / back dirs, binding hotkeys to commands... but some other stuff I don't like)
 # autosuggestions (suggest completion for last matching command in history)
 # fast-syntax-highlighting (faster syntax highlighting,theme options. Any catch?)=
 
 # Load additional completions
 znap source zsh-users/zsh-completions
-autoload -U compinit && compinit
 
 # Fish style inline suggestions. Defaults to latest matching history, but can also use completions
 znap source zsh-users/zsh-autosuggestions
@@ -156,6 +153,9 @@ znap source zpm-zsh/clipboard
 
 # Adds automatic enviornment loading and unloading (including functions, etc.)
 znap source https://github.com/Tarrasch/zsh-autoenv
+
+# Adds the ability to customize the 256 basic terminal colors
+znap source chriskempson/base16-shell
 
 # DISABLED: serious errors with parsing some flags (e.g. interprets --verbose as --shred).
 # Adds a prompt to rm when deleting 3+ files, and allows recycling instead of de-indexing with the -c flag
@@ -186,6 +186,13 @@ bindkey '^[[B' history-substring-search-down
 if [ -f "${ZDOTDIR-$HOME/.config/zsh}/.zsh_aliases" ]; then
 	source "${ZDOTDIR-$HOME/.config/zsh}/.zsh_aliases"
 fi
+
+# Add functions dir to fpath and load them
+fpath=( "${ZDOTDIR-$HOME/.config/zsh}/functions" "${fpath[@]}" )
+autoload -Uz $fpath[1]/*(.:t)
+
+# Set up completions
+autoload -U compinit && compinit -d
 
 ## Set terminal title
 # Set terminal window and tab/icon title
