@@ -11,6 +11,11 @@
 !/.config/
 /.config/*
 # whitelist individual configs
+!/.config/Code
+/.config/Code/*
+!/.config/Code/User
+/.config/Code/User/*
+!/.config/Code/User/settings.json
 !/.config/dircolors
 !/.config/git
 !/.config/less
@@ -26,6 +31,7 @@
 /.config/zsh/secrets.zsh
 /.config/zsh/secrets
 /.config/zsh/znap-repos
+
 
 # Ignore compiled zsh
 *.zwc

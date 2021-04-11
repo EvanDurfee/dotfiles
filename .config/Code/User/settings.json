@@ -1,0 +1,14 @@
+{
+    "editor.renderWhitespace": "all",
+    "editor.insertSpaces": false,
+    "editor.fontLigatures": true,
+    "editor.fontSize": 16,
+    "workbench.colorTheme": "Darcula",
+    "workbench.iconTheme": "eq-material-theme-icons-darker",
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "settingsSync.ignoredSettings": [
+    
+    ],
+    "editor.fontFamily": "'FiraCode Nerd Font', 'MesloLGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'"
+}
