@@ -184,4 +184,4 @@ export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
 ## Other
 export CALIBRE_USE_SYSTEM_THEME=1
-# export CALIBRE_USE_DARK_PALETTE=1
+export CALIBRE_USE_DARK_PALETTE=1

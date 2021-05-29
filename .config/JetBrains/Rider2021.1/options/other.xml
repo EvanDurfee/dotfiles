@@ -1,0 +1,39 @@
+<application>
+  <component name="ProjectPluginTrackerManager">
+    <trackers>
+      <map>
+        <entry key="1t7WlWvf5yuOHytxDDXZ31QZEpx">
+          <value>
+            <ProjectPluginTracker />
+          </value>
+        </entry>
+      </map>
+    </trackers>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Debug.Allow.Typing" value="true" />
+    <property name="Non.Modal.Commit.Single.Click2" value="true" />
+    <property name="Non.Modal.Commit4" value="true" />
+    <property name="NonModalCommitCustomization.IsApplied" value="true" />
+    <property name="RD.Init.Cfg.2" value="true" />
+    <property name="RD.Init.DialogShown.Ide" value="true" />
+    <property name="RD.Light.Edit.Disabled" value="true" />
+    <property name="RD.Switch.Laf" value="true" />
+    <property name="Tutorials.In.Recent.Projects.Disabled" value="true" />
+    <property name="appcds.runOnSecondStart" value="RD-211.7142.19-071db03fc426a7dab4f92ddb1b362e925c4fd4bfafbe803b891ec80bd039acc6" />
+    <property name="ask.about.ctrl.y.shortcut.v2" value="true" />
+    <property name="evlsprt3.211" value="19" />
+    <property name="fileTypeChangedCounter" value="1" />
+    <property name="fileTypeDetectors" value="com.intellij.database.vfs.DbStorageFileType$Detector:com.intellij.ide.scratch.ScratchFileServiceImpl$Detector:com.intellij.javascript.debugger.sourcemap.SourceMapFileType$MyFileTypeDetector:com.jetbrains.nodejs.util.NodeFileTypeDetector$JavaScriptFileTypeDetector:com.jetbrains.nodejs.util.NodeFileTypeDetector$TypeScriptFileTypeDetector:com.jetbrains.rider.cpp.fileType.CppHeaderFileTypeDetector" />
+    <property name="ide.updates.previous.build.number" value="RD-211.7142.19" />
+    <property name="ignoreUltimateEdition" value="true" />
+    <property name="last_selected_template" value="Empty Solution|" />
+    <property name="last_selected_template_parameters" value="" />
+    <property name="tasks.pass.word.conversion.enforced" value="true" />
+    <property name="toolwindow.stripes.buttons.info.shown" value="true" />
+    <property name="ts.lib.d.ts.version" value="4.2.2" />
+  </component>
+  <component name="ToolbarSettingsService">
+    <option name="NEW_TOOLBAR_SETTINGS" value="OLD_NAVBAR" />
+  </component>
+</application>
