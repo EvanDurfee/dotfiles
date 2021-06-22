@@ -42,7 +42,7 @@
     <property name="ide.updates.previous.build.number" value="GO-211.7142.13" />
     <property name="last_opened_file_path" value="$USER_HOME$/.local/share/go" />
     <property name="log.trace.categories" value="#com.jetbrains.rdserver.requests&#10;#com.jetbrains.rd.ide.document&#10;#com.jetbrains.rdserver.document&#10;#com.jetbrains.rdserver.editors&#10;#com.jetbrains.rdserver.actions" />
-    <property name="org.jetbrains.plugins.go.LAST_UPDATE" value="1621279169040" />
+    <property name="org.jetbrains.plugins.go.LAST_UPDATE" value="1623699794005" />
     <property name="org.jetbrains.plugins.go.LAST_VERSION" value="211.7142.13" />
     <property name="run.targets.was.enabled.once" value="true" />
     <property name="settings.code.style.selected.tab.go" value="Tabs and Indents" />

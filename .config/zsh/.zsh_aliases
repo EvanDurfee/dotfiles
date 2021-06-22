@@ -16,3 +16,7 @@ alias egrep='egrep --color=auto'
 alias userctl='systemctl --user'
 
 alias cfg='/bin/git --git-dir=$HOME/.home/ --work-tree=$HOME'
+
+alias k='kubectl'
+alias d='docker'
+alias h='helm'

@@ -17,7 +17,7 @@ zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/znap
 # automatically compile loaded zsh files
 zstyle ':znap:*' auto-compile yes
 # Load znap for plugin management
-source "$HOME"/.local/src/zsh-snap/znap.zsh
+source "$XDG_DATA_HOME"/znap/zsh-snap/znap.zsh
 
 # Load the actual prompt
 znap source romkatv/powerlevel10k
@@ -48,7 +48,7 @@ zstyle ':completion:*' rehash true                              # automatically 
 # Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path $ZDOTDIR/cache
+zstyle ':completion:*' cache-path "$ZDOTDIR"/cache
 zstyle ':completion:*' menu select                              # enable menu style completions
 
 # History
@@ -57,6 +57,8 @@ setopt extended_history                                         # save timestamp
 # setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
 setopt inc_append_history_time                                  # Like inc_append_history, but saves after the command completes so that execution time is correct with extended history
 setopt hist_reduce_blanks                                       # remove superfluous blanks
+# setopt hist_ignore_dups                                         # Don't add to history if this command is the same as the previous
+# setopt hist_find_no_dups                                        # When searching back through history, skip duplicates
 setopt hist_ignore_all_dups                                     # If a new command is a duplicate, remove the older one
 
 HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
@@ -115,8 +117,6 @@ bindkey '^[[3;5~' kill-word                                     # delete next wo
 bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
 bindkey '^[[Z' undo                                             # Shift+tab undo last action
 
-# bindkey '' send-break                                         # <?> to cancel tab-completion menu
-
 
 
 ## Theming
@@ -139,20 +139,28 @@ export LESS=-R
 
 # Ideas:
 # zsh-edit (adds hotkeys for going forwar / back dirs, binding hotkeys to commands... but some other stuff I don't like)
-# autosuggestions (suggest completion for last matching command in history)
 # fast-syntax-highlighting (faster syntax highlighting,theme options. Any catch?)=
+
+# fzf tab completion
+znap source Aloxaf/fzf-tab
+# Hotkey to accept query input instead of a suggestion
+zstyle ':fzf-tab:*' print-query alt-enter
 
 # Load additional completions
 znap source zsh-users/zsh-completions
 
 # Fish style inline suggestions. Defaults to latest matching history, but can also use completions
 znap source zsh-users/zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
+# Only use match_prev_cmd if history order is preserved
+# ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Adds clipboard functions (pbcopy, pbpaste, and clip) for interacting with system clipboard (works for Windows, Mac, X, Wayland...).
 znap source zpm-zsh/clipboard
 
 # Adds automatic enviornment loading and unloading (including functions, etc.)
-znap source https://github.com/Tarrasch/zsh-autoenv
+znap source Tarrasch/zsh-autoenv
 
 # Adds the ability to customize the 256 basic terminal colors
 znap source chriskempson/base16-shell
@@ -167,7 +175,6 @@ znap source chriskempson/base16-shell
 znap source evandurfee/zsh-fzf-history-search
 bindkey '^r' fzf-history-search
 
-# TODO: how does this compare to fast-syntax-highlighting?
 # Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
 znap source zsh-users/zsh-syntax-highlighting
 
@@ -189,8 +196,17 @@ fi
 fpath=( "${ZDOTDIR-$HOME/.config/zsh}/functions" "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
-# Set up completions
-autoload -U compinit && compinit -d
+## Cache completions if the applications are present
+if hash kubectl 2>/dev/null; then
+	znap compdef _kubectl 'kubectl completion zsh'
+fi
+if hash helm 2>/dev/null; then
+	znap compdef _helm 'helm completion zsh'
+fi
+
+# Completions are managed by znap
+# # Set up completions
+# autoload -U compinit && compinit -d
 
 ## Set terminal title
 # Set terminal window and tab/icon title

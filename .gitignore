@@ -30,6 +30,7 @@
 # !/.config/JetBrains/*/options/laf.xml
 # !/.config/JetBrains/*/options/other.xml
 # !/.config/JetBrains/*/options/ui.lnf.xml
+/.config/JetBrains/*/options/actionSummary.xml
 /.config/JetBrains/*/options/features.usage.statistics.xml
 /.config/JetBrains/*/options/window.state.xml
 /.config/JetBrains/*/options/recentProjects.xml
