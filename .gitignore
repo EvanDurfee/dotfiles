@@ -15,42 +15,13 @@
 /.config/Code/*
 !/.config/Code/User
 /.config/Code/User/*
+!/.config/Code/User/keybindings.json
 !/.config/Code/User/settings.json
 !/.config/dircolors
 !/.config/git
 !/.config/less
-!/.config/JetBrains
-/.config/JetBrains/*/*
-!/.config/JetBrains/*/options
-# /.config/JetBrains/*/options/*
-# !/.config/JetBrains/*/options/colors.scheme.xml
-# !/.config/JetBrains/*/options/editor.xml
-# !/.config/JetBrains/*/options/ide.general.xml
-# !/.config/JetBrains/*/options/keymap.xml
-# !/.config/JetBrains/*/options/laf.xml
-# !/.config/JetBrains/*/options/other.xml
-# !/.config/JetBrains/*/options/ui.lnf.xml
-/.config/JetBrains/*/options/actionSummary.xml
-/.config/JetBrains/*/options/features.usage.statistics.xml
-/.config/JetBrains/*/options/window.state.xml
-/.config/JetBrains/*/options/recentProjects.xml
-/.config/JetBrains/*/options/updates.xml
-/.config/JetBrains/*/options/databaseDrivers.xml
-/.config/JetBrains/*/options/runner.layout.xml
-/.config/JetBrains/*/options/projectTemplateCache.xml
-/.config/JetBrains/GoLand*/options/go.sdk.xml
-/.config/JetBrains/GoLand*/options/goLibraries.xml
-/.config/JetBrains/GoLand*/options/pluginAdvertiser.xml
-/.config/JetBrains/GoLand*/options/profilerRunConfigurations.xml
-/.config/JetBrains/Rider*/options/trustedSolutions.xml
-/.config/JetBrains/Rider*/options/riderVersions.xml
-/.config/JetBrains/Rider*/options/recentSolutions.xml
-/.config/JetBrains/Rider*/options/recentSolutionsConfiguration.xml
-# /.config/JetBrains/*/options/*
-# !/.config/JetBrains/*/options/editor.xml
-# !/.config/JetBrains/*/options/keymap.xml
-# !/.config/JetBrains/GoLand*/options/colors.scheme.xml
-!/.config/JetBrains/*/codestyles
+# Use jetbrains' own settings sync instead
+#!/.config/JetBrains
 !/.config/npm
 !/.config/profile
 !/.config/profile/overrides

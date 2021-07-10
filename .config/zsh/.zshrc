@@ -12,18 +12,21 @@ if [ -z "$XDG_DATA_HOME" ] || [ -z "$XDG_CONFIG_HOME" ]; then
 	return 1
 fi
 
+hash -d zsh="$ZDOTDIR"
+
 # Set the location for our zsh plugin downloads
-zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/znap
+zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh-snap
 # automatically compile loaded zsh files
 zstyle ':znap:*' auto-compile yes
 # Load znap for plugin management
-source "$XDG_DATA_HOME"/znap/zsh-snap/znap.zsh
+source "$XDG_DATA_HOME"/zsh-snap/zsh-snap/znap.zsh
 
 # Load the actual prompt
 znap source romkatv/powerlevel10k
 
 # Prepare the LS_COLORS variable (clear the cache if changing the config)
 znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf"'
+# znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/trapd00r_LS_COLORS.conf"'
 
 ## General Options
 # setopt correct                                                  # Auto correct mistakes
@@ -52,7 +55,7 @@ zstyle ':completion:*' cache-path "$ZDOTDIR"/cache
 zstyle ':completion:*' menu select                              # enable menu style completions
 
 # History
-setopt append_history                                           # append history instead of overwriting
+# setopt append_history                                           # append history instead of overwriting
 setopt extended_history                                         # save timestamp and duration to history
 # setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
 setopt inc_append_history_time                                  # Like inc_append_history, but saves after the command completes so that execution time is correct with extended history
@@ -141,13 +144,31 @@ export LESS=-R
 # zsh-edit (adds hotkeys for going forwar / back dirs, binding hotkeys to commands... but some other stuff I don't like)
 # fast-syntax-highlighting (faster syntax highlighting,theme options. Any catch?)=
 
-# fzf tab completion
-znap source Aloxaf/fzf-tab
+# fzf tab completion (completions | fzf)
+# znap source Aloxaf/fzf-tab
 # Hotkey to accept query input instead of a suggestion
-zstyle ':fzf-tab:*' print-query alt-enter
+# zstyle ':fzf-tab:*' print-query alt-enter
+
+# fsf tab completion (fzf | completion)
+# znap source lincheney/fzf-tab-completion
 
 # Load additional completions
 znap source zsh-users/zsh-completions
+
+# Load docker completions
+if hash docker 2>/dev/null; then
+	# This enables Zsh to understand commands like docker run -it ubuntu. However, by enabling this, this also makes Zsh complete docker run -u<tab> with docker run -uapprox which is not valid. The users have to put the space or the equal sign themselves before trying to complete.
+	# Therefore, this behavior is disabled by default. To enable it:
+	# zstyle ':completion:*:*:docker:*' option-stacking yes
+	# zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+	# The docker plugin is missing an actual plugin file, so add it directly to fpath
+	fpath+=(~[ohmyzsh/ohmyzsh]/plugins/docker)
+	if hash docker-compose 2>/dev/null; then
+		# I don't actually want the aliases from the compose plugin, so add it to fpath as well
+		fpath+=(~[ohmyzsh/ohmyzsh]/plugins/docker-compose)
+	fi
+fi
 
 # Fish style inline suggestions. Defaults to latest matching history, but can also use completions
 znap source zsh-users/zsh-autosuggestions
@@ -201,8 +222,13 @@ if hash kubectl 2>/dev/null; then
 	znap compdef _kubectl 'kubectl completion zsh'
 fi
 if hash helm 2>/dev/null; then
-	znap compdef _helm 'helm completion zsh'
+	znap compdef _helm    'helm completion zsh'
 fi
+if hash rustup 2>/dev/null; then
+	znap compdef _rustup  'rustup completions zsh'
+	znap compdef _cargo   'rustup completions zsh cargo'
+fi
+
 
 # Completions are managed by znap
 # # Set up completions
