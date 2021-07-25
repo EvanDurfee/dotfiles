@@ -13,7 +13,9 @@
 # add .local/bin to path
 export PATH="$PATH:$HOME/.local/bin"
 
-# defaults
+
+
+## Application defaults
 export EDITOR="nano"
 export TERMINAL="tilix"
 export BROWSER="firefox"
@@ -22,6 +24,23 @@ export KUBE_EDITOR="gedit"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+
+
+
+## Application configs
+
+# Calibre
+# Force dark theme
+export CALIBRE_USE_SYSTEM_THEME=0
+export CALIBRE_USE_DARK_PALETTE=1
+
+# Exa
+# Make the detailed view less of a rainbow
+if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf ]; then
+	export EXA_COLORS="$(grep --extended-regexp --only-matching "^[^# $(printf '\t')]+" "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf | tr '\n' ':')"
+fi
+
+
 
 ## ~/ cleanup (may need to create these folders / files manually)
 # Check here for updates: https://wiki.archlinux.org/index.php/XDG_Base_Directory
@@ -180,12 +199,9 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME"/wineprefixes
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
-# Overrides
-[ -e "$XDG_CONFIG_HOME/profile/override" ] && . "$XDG_CONFIG_HOME/profile/override"
-
 # ZSH
+# Should be done in ~/.zshenv instead, since it is first in the load order
 # export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 
-## Other
-export CALIBRE_USE_SYSTEM_THEME=0
-export CALIBRE_USE_DARK_PALETTE=1
+## Overrides
+[ -e "$XDG_CONFIG_HOME/profile/override" ] && . "$XDG_CONFIG_HOME/profile/override"

@@ -1,0 +1,21 @@
+# See more at: https://the.exa.website/docs/colour-themes
+## Permission bits
+ur=33;1
+uw=33;1
+ue=32;1
+ux=32;1;4
+gr=33
+gw=33
+gx=33
+tr=33
+tw=33
+tx=32
+
+## File sizes
+sn=38;5;10
+sb=38;5;2
+## Owners and groups
+uu=33;1
+un=0
+gu=33
+gn=0;2

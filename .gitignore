@@ -18,6 +18,7 @@
 !/.config/Code/User/keybindings.json
 !/.config/Code/User/settings.json
 !/.config/dircolors
+!/.config/exa
 !/.config/git
 !/.config/less
 # Use jetbrains' own settings sync instead
