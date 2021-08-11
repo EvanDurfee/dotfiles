@@ -27,6 +27,8 @@
 !/.config/profile
 !/.config/profile/overrides
 !/.config/readline
+!/.config/restic
+/.config/restic/password*
 !/.config/vim
 !/.config/wget
 !/.config/zsh

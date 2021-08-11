@@ -22,3 +22,15 @@ alias cfg='/bin/git --git-dir=$HOME/.home/ --work-tree=$HOME'
 alias k='kubectl'
 alias d='docker'
 alias h='helm'
+
+# Restic backups
+alias mikoshi-ctl='sudo restic \
+    --password-file /home/evan/.config/restic/password.txt \
+    -r sftp::/data/souls/evan/Backups/silver \
+    -o sftp.command="ssh -i /home/evan/.ssh/id_rsa evan@mikoshi.edurfee.com -s sftp"'
+
+alias mikoshi-backup='mikoshi-ctl \
+    backup \
+    --one-file-system \
+    --exclude-file=/home/evan/.config/restic/excludes.txt \
+	/vol/userdata /home / '
