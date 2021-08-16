@@ -29,6 +29,8 @@
 !/.config/readline
 !/.config/restic
 /.config/restic/password*
+!/.config/systemd
+/.config/systemd/user/default.target.wants/
 !/.config/vim
 !/.config/wget
 !/.config/zsh

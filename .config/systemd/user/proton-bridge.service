@@ -1,0 +1,10 @@
+[Unit]
+Description=Protonmail client bridge service
+
+[Service]
+Type=simple
+StandardOutput=journal
+ExecStart=flatpak run ch.protonmail.protonmail-bridge --noninteractive
+
+[Install]
+WantedBy=default.target
