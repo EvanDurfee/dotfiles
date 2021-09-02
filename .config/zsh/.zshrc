@@ -120,8 +120,8 @@ bindkey '^[[1;5C' forward-word                                  # Ctrl+right
 
 bindkey '^[[3;5~' kill-word                                     # delete next word with ctrl+delete
 bindkey '^H' backward-kill-word                                 # delete previous word with ctrl+backspace
-bindkey '^[[Z' undo                                             # Shift+tab undo last action
-
+# bindkey '^[[Z' undo                                             # Shift+tab undo last action
+bindkey '^[[Z' reverse-menu-complete                            # Shift+tab to jump to the previous completiong
 
 
 ## Theming
