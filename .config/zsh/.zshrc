@@ -211,12 +211,12 @@ bindkey '^[[B' history-substring-search-down
 
 
 ## Load aliases
-if [ -f "${ZDOTDIR-$HOME/.config/zsh}/.zsh_aliases" ]; then
-	source "${ZDOTDIR-$HOME/.config/zsh}/.zsh_aliases"
+if [ -f "${ZDOTDIR:-$HOME}/.zaliases" ]; then
+	source "${ZDOTDIR:-$HOME}/.zaliases"
 fi
 
 # Add functions dir to fpath and load them
-fpath=( "${ZDOTDIR-$HOME/.config/zsh}/functions" "${fpath[@]}" )
+fpath=( "${ZDOTDIR:-$HOME}/functions" "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
 ## Cache completions if the applications are present
@@ -231,10 +231,10 @@ if hash rustup 2>/dev/null; then
 	znap fpath _cargo   'rustup completions zsh cargo'
 fi
 
-
-# Completions are managed by znap
-# # Set up completions
-# autoload -U compinit && compinit -d
+## Load overrides
+if [ -f "${ZDOTDIR:-$HOME}/.zoverride" ]; then
+	source "${ZDOTDIR:-$HOME}/.zoverride"
+fi
 
 ## Set terminal title
 # Set terminal window and tab/icon title
