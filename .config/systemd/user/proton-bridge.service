@@ -3,8 +3,13 @@ Description=Protonmail client bridge service
 
 [Service]
 Type=simple
-StandardOutput=journal
-ExecStart=flatpak run ch.protonmail.protonmail-bridge --noninteractive
+ExecStart=/usr/bin/protonmail-bridge --noninteractive
+Restart=always
+KillMode=process
+
+# Flatpak
+#ExecStart=flatpak run ch.protonmail.protonmail-bridge --noninteractive
+#ExecStop=flatpak kill ch.protonmail.protonmail-bridge
 
 [Install]
 WantedBy=default.target

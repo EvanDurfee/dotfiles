@@ -31,6 +31,8 @@
 /.config/restic/password*
 !/.config/systemd
 /.config/systemd/user/default.target.wants/
+/.config/systemd/user/*
+!/.config/systemd/user/proton-bridge.service
 !/.config/vim
 !/.config/wget
 !/.config/zsh
