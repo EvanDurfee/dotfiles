@@ -20,6 +20,7 @@
 !/.config/dircolors
 !/.config/exa
 !/.config/git
+/.config/git/override.config
 !/.config/less
 # Use jetbrains' own settings sync instead
 #!/.config/JetBrains

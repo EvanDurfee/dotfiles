@@ -28,3 +28,6 @@
 [delta "evan"]
 	minus-style = red bold
 	plus-style = green bold
+[include]
+	# Local machine overrides
+	path = override.config
