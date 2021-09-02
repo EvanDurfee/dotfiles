@@ -45,6 +45,8 @@ autoload -U select-word-style
 select-word-style normal                                        # Set to "bash" to ignore WORDCHARS and use only alphanumerics
 
 # Completions
+zstyle ':completion:*' completer _complete                      # Do not expand variables while completing
+# zstyle ':completion:*' completer _expand _complete              # If present, expand the variable under the cursor instead of completing
 # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 zstyle ':completion:*' rehash true                              # automatically find new executables in path
@@ -219,14 +221,14 @@ autoload -Uz $fpath[1]/*(.:t)
 
 ## Cache completions if the applications are present
 if hash kubectl 2>/dev/null; then
-	znap compdef _kubectl 'kubectl completion zsh'
+	znap fpath _kubectl 'kubectl completion zsh'
 fi
 if hash helm 2>/dev/null; then
-	znap compdef _helm    'helm completion zsh'
+	znap fpath _helm    'helm completion zsh'
 fi
 if hash rustup 2>/dev/null; then
-	znap compdef _rustup  'rustup completions zsh'
-	znap compdef _cargo   'rustup completions zsh cargo'
+	znap fpath _rustup  'rustup completions zsh'
+	znap fpath _cargo   'rustup completions zsh cargo'
 fi
 
 
