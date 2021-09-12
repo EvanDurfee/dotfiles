@@ -1,11 +1,15 @@
 [Unit]
 Description=Protonmail client bridge service
+# After=gnome-keyring.service
+After=multi-user.target
 
 [Service]
 Type=simple
+# Try to wait for other services to start
+ExecStartPre=/bin/sleep 20
 ExecStart=/usr/bin/protonmail-bridge --noninteractive
 Restart=always
-KillMode=process
+#KillMode=process
 
 # Flatpak
 #ExecStart=flatpak run ch.protonmail.protonmail-bridge --noninteractive
