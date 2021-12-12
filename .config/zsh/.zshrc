@@ -18,6 +18,12 @@ hash -d zsh="$ZDOTDIR"
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh-snap
 # automatically compile loaded zsh files
 zstyle ':znap:*' auto-compile yes
+
+if [ ! -d "$XDG_DATA_HOME"/zsh-snap/zsh-snap ]; then
+	mkdir -p "$XDG_DATA_HOME"/zsh-snap/
+	git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git "$XDG_DATA_HOME"/zsh-snap/zsh-snap
+fi
+
 # Load znap for plugin management
 source "$XDG_DATA_HOME"/zsh-snap/zsh-snap/znap.zsh
 
