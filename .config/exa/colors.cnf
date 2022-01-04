@@ -14,8 +14,12 @@ tx=32
 ## File sizes
 sn=38;5;10
 sb=38;5;2
+
 ## Owners and groups
 uu=33;1
 un=0
 gu=33
 gn=0;2
+
+## Timestamp
+da=38;5;14

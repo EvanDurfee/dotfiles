@@ -39,6 +39,7 @@ export CALIBRE_USE_DARK_PALETTE=1
 if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf ]; then
 	export EXA_COLORS="$(grep --extended-regexp --only-matching "^[^# $(printf '\t')]+" "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf | tr '\n' ':')"
 fi
+export TIME_STYLE="long-iso"
 
 
 
