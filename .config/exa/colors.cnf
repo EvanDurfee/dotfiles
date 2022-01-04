@@ -1,14 +1,14 @@
 # See more at: https://the.exa.website/docs/colour-themes
 ## Permission bits
-ur=33;1
-uw=33;1
-ue=32;1
-ux=32;1;4
+ur=33
+uw=38;5;172
+ue=32
+ux=32;4
 gr=33
-gw=33
-gx=33
+gw=38;5;172
+gx=32
 tr=33
-tw=33
+tw=38;5;172
 tx=32
 
 ## File sizes
