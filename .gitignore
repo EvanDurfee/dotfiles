@@ -11,12 +11,13 @@
 !/.config/
 /.config/*
 # whitelist individual configs
-!/.config/Code
-/.config/Code/*
-!/.config/Code/User
-/.config/Code/User/*
-!/.config/Code/User/keybindings.json
-!/.config/Code/User/settings.json
+# Use VS Code sync instead
+# !/.config/Code
+# /.config/Code/*
+# !/.config/Code/User
+# /.config/Code/User/*
+# !/.config/Code/User/keybindings.json
+# !/.config/Code/User/settings.json
 !/.config/dircolors
 !/.config/exa
 !/.config/git
