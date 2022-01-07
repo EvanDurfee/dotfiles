@@ -10,6 +10,10 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# Exa
+alias x='exa --all --long --header --group --group-directories-first'
+alias xt='x --tree'
+
 # saner defaults
 #alias cp="cp -i"                                                # Confirm before overwriting something
 #alias df='df -h'                                                # Human-readable sizes

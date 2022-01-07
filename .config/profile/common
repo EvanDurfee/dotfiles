@@ -37,9 +37,14 @@ export CALIBRE_USE_DARK_PALETTE=1
 # Exa
 # Make the detailed view less of a rainbow
 if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf ]; then
+	# Combine non-commented lines
 	export EXA_COLORS="$(grep --extended-regexp --only-matching "^[^# $(printf '\t')]+" "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf | tr '\n' ':')"
 fi
+export EXA_STRICT=true
 export TIME_STYLE="long-iso"
+# For more Exa features, see: https://the.exa.website/features.
+# You can also study my Dotfiles project: https://www.alchemists.io/projects/dotfiles.
+# ☿ 🜔 🜍 🜂 🜃 🜁 🜄
 
 
 
