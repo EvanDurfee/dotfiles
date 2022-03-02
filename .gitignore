@@ -25,6 +25,7 @@
 !/.config/less
 # Use jetbrains' own settings sync instead
 #!/.config/JetBrains
+!/.config/nano
 !/.config/npm
 !/.config/profile
 !/.config/profile/overrides
