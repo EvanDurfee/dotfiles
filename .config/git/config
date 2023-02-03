@@ -14,9 +14,8 @@
 	ui = auto
 [core]
 	autocrlf = input
-	pager = delta
+	pager = type delta >/dev/null 2>&1 && exec delta || exec less -FR
 	editor = nano -b -r 72
-#	pager = less -FR
 [init]
 	defaultBranch = master
 [pull]
