@@ -30,14 +30,3 @@
 [include]
 	# Local machine overrides
 	path = override.config
-[maintenance]
-	repo = /home/evan/.local/share/zsh-snap/base16-shell
-	repo = /home/evan/.local/share/zsh-snap/clipboard
-	repo = /home/evan/.local/share/zsh-snap/powerlevel10k
-	repo = /home/evan/.local/share/zsh-snap/zsh-autoenv
-	repo = /home/evan/.local/share/zsh-snap/zsh-autosuggestions
-	repo = /home/evan/.local/share/zsh-snap/zsh-completions
-	repo = /home/evan/.local/share/zsh-snap/zsh-fzf-history-search
-	repo = /home/evan/.local/share/zsh-snap/zsh-history-substring-search
-	repo = /home/evan/.local/share/zsh-snap/zsh-snap
-	repo = /home/evan/.local/share/zsh-snap/zsh-syntax-highlighting
