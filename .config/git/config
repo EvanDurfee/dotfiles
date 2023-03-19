@@ -1,6 +1,3 @@
-[user]
-	email = evanmdurfee@gmail.com
-	name = Evan Durfee
 [diff]
 	tool = kdiff3
 [merge]
@@ -29,4 +26,8 @@
 	plus-style = green bold
 [include]
 	# Local machine overrides
+    # Include e.g. user, email info here
 	path = override.config
+#[user]
+#    email =
+#    name =
