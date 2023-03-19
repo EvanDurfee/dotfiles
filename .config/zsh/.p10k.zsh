@@ -32,6 +32,7 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
+    is_root
     # os_icon               # os identifier
     dir                     # current directory
     vcs                     # git status
@@ -1634,6 +1635,17 @@
   typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='at '
+
+
+  ####################################[ is_root: user is root ]####################################
+  # Custom segment to show that this is the root user
+  POWERLEVEL9K_IS_ROOT_FOREGROUND=1
+  POWERLEVEL9K_IS_ROOT_BACKGROUND=235
+  function prompt_is_root() {
+    if [ "$EUID" -eq 0 ]; then
+      p10k segment -i 'root'
+    fi
+  }
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
