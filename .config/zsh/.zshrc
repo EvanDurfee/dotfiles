@@ -201,7 +201,8 @@ znap source chriskempson/base16-shell
 # touch ~/.rm_recycle_home
 
 # Adds a function and widget for searching history with fuzzy matching
-znap source evandurfee/zsh-fzf-history-search
+#znap source evandurfee/zsh-fzf-history-search
+znap source joshskidmore/zsh-fzf-history-search
 bindkey '^r' fzf-history-search
 
 # Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
