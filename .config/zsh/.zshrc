@@ -37,6 +37,7 @@ znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf"'
 ## General Options
 # setopt correct                                                  # Auto correct mistakes
 setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+setopt interactivecomments                                      # Interpet # as a comment in interactive shells
 # setopt nocaseglob                                               # Case insensitive globbing
 # setopt nomatch                                                  # return a non-zero status if no results match the pattern
 # setopt completealiases                                          # disables!? autocompletion for aliases
