@@ -18,7 +18,7 @@
 [pull]
 	ff = only
 [delta]
-	features = evan
+#	features = evan
 	line-numbers = true
 	side-by-side = false
 [delta "evan"]
