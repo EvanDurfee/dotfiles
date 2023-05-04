@@ -32,6 +32,7 @@
 !/.config/readline
 !/.config/restic
 /.config/restic/password*
+!/.config/tmux
 !/.config/systemd
 /.config/systemd/user/default.target.wants/
 /.config/systemd/user/*
