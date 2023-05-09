@@ -36,6 +36,7 @@ znap source romkatv/powerlevel10k
 znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf"'
 # znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/trapd00r_LS_COLORS.conf"'
 
+
 # If running kitty terminal, add integration
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="no-cursor"
@@ -230,8 +231,6 @@ zmodload zsh/terminfo
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-
-
 ## Load aliases
 if [ -f "${ZDOTDIR:-$HOME}/.zaliases" ]; then
 	source "${ZDOTDIR:-$HOME}/.zaliases"
@@ -240,6 +239,11 @@ fi
 # Add functions dir to fpath and load them
 fpath=( "${ZDOTDIR:-$HOME}/functions" "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
+
+# Zoxide hooks
+if hash zoxide 2>/dev/null; then
+   znap eval zoxide 'zoxide init zsh'
+fi
 
 ## Cache completions if the applications are present
 if hash kubectl 2>/dev/null; then

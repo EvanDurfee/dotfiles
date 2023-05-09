@@ -206,6 +206,9 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME"/wineprefixes
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
+# ZOXIDE
+export _ZO_DATA_DIR="$XDG_CACHE_HOME"/zoxide
+
 # ZSH
 # Should be done in ~/.zshenv instead, since it is first in the load order
 # export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
