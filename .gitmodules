@@ -1,0 +1,3 @@
+[submodule "clip"]
+	path = .local/share/clip
+	url = https://github.com/EvanDurfee/clip.git
