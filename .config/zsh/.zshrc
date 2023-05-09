@@ -12,6 +12,7 @@ if [ -z "$XDG_DATA_HOME" ] || [ -z "$XDG_CONFIG_HOME" ]; then
 	return 1
 fi
 
+# Add named directory zsh
 hash -d zsh="$ZDOTDIR"
 
 # Set the location for our zsh plugin downloads
@@ -188,7 +189,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Adds clipboard functions (pbcopy, pbpaste, and clip) for interacting with system clipboard (works for Windows, Mac, X, Wayland...).
-znap source zpm-zsh/clipboard
+# Removed in favor of custom clip script
+# znap source zpm-zsh/clipboard
 
 # Adds automatic enviornment loading and unloading (including functions, etc.)
 znap source Tarrasch/zsh-autoenv

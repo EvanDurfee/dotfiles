@@ -28,6 +28,7 @@ alias xt='x --tree'
 alias userctl='systemctl --user'
 
 alias cfg='/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+alias cfg-update='cfg pull && cfg submodule update --init --recursive'
 
 alias k='kubectl'
 alias d='docker'
