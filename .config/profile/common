@@ -17,10 +17,17 @@ export PATH="$PATH:$HOME/.local/bin"
 
 ## Application defaults
 export EDITOR="nano"
-export TERMINAL="tilix"
+if hash kitty 2>/dev/null; then
+	export TERMINAL="kitty"
+elif hash tilix 2>/dev/null; then
+	export TERMINAL="tilix"
+fi
 export BROWSER="firefox"
-export KUBE_EDITOR="gedit"
-
+if hash gnome-text-editor 2>/dev/null; then
+	export KUBE_EDITOR="gnome-text-editor"
+elif hash gedit 2>/dev/null; then
+	export KUBE_EDITOR="gedit"
+fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -184,6 +191,11 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 # Teamspeak
 # Disabled to avoid breaking flatpak installations
 # export TS3_CONFIG_DIR="$XDG_CONFIG_HOME/ts3client"
+
+# Tmux Smart Session Manager
+if [ -d "$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin" ]; then
+	export PATH="$PATH:$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin"
+fi
 
 # GNU Screen
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
