@@ -175,21 +175,6 @@ export LESS=-R
 # Load additional completions
 znap source zsh-users/zsh-completions
 
-# Load docker completions
-if hash docker 2>/dev/null; then
-	# This enables Zsh to understand commands like docker run -it ubuntu. However, by enabling this, this also makes Zsh complete docker run -u<tab> with docker run -uapprox which is not valid. The users have to put the space or the equal sign themselves before trying to complete.
-	# Therefore, this behavior is disabled by default. To enable it:
-	# zstyle ':completion:*:*:docker:*' option-stacking yes
-	# zstyle ':completion:*:*:docker-*:*' option-stacking yes
-
-	# The docker plugin is missing an actual plugin file, so add it directly to fpath
-	fpath+=(~[ohmyzsh/ohmyzsh]/plugins/docker)
-	if hash docker-compose 2>/dev/null; then
-		# I don't actually want the aliases from the compose plugin, so add it to fpath as well
-		fpath+=(~[ohmyzsh/ohmyzsh]/plugins/docker-compose)
-	fi
-fi
-
 # Fish style inline suggestions. Defaults to latest matching history, but can also use completions
 znap source zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
