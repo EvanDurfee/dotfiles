@@ -1,7 +1,0 @@
-/home/evan/Downloads/*
-/home/evan/.cache/*
-
-/dev/*
-/proc/*
-/run/*
-/tmp/*

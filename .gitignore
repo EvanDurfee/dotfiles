@@ -29,10 +29,10 @@
 !/.config/nano
 !/.config/npm
 !/.config/profile
-!/.config/profile/overrides
+/.config/profile/override
 !/.config/readline
-!/.config/restic
-/.config/restic/password*
+#!/.config/restic
+#/.config/restic/password*
 !/.config/tmux
 !/.config/systemd
 /.config/systemd/user/default.target.wants/
@@ -43,9 +43,10 @@
 !/.config/zsh
 /.config/zsh/.zcompdump
 /.config/zsh/cache
-/.config/zsh/secrets.zsh
+/.config/zsh/.secrets
 /.config/zsh/secrets
-/.config/zsh/znap-repos
+/.config/zsh/.zoverride
+/.config/zsh/zoverride
 
 
 # Ignore compiled zsh
