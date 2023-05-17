@@ -31,8 +31,14 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-
-
+# Add inherent scroll support to less
+# Means less will handle scrolling instead of the terminal emulator, which is
+#  required for scrolling in tmux to work (only works for graphical sessions).
+if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
+	export LESS="-RF --mouse --wheel-lines=5"
+else
+	export LESS="-RF"
+fi
 
 ## Application configs
 

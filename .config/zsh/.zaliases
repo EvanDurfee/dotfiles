@@ -9,6 +9,30 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias ip='ip --color=auto'
+alias diff='diff --color=auto'
+
+# Colored Manpages
+man() {
+	LESS_TERMCAP_mb=$'\E[01;32m' \
+	LESS_TERMCAP_md=$'\E[01;32m' \
+	LESS_TERMCAP_me=$'\E[0m' \
+	LESS_TERMCAP_se=$'\E[0m' \
+	LESS_TERMCAP_so=$'\E[01;47;34m' \
+	LESS_TERMCAP_ue=$'\E[0m' \
+	LESS_TERMCAP_us=$'\E[01;36m' \
+	GROFF_NO_SGR=1 \
+	command man "$@"
+}
+
+
+# Enable build-in scrolling for less if possible
+# 
+if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
+	alias less="less -RF --mouse --wheel-lines=5"
+else
+	alias less="less -RF"
+fi
 
 # Better cp for COW supporting filesystems
 alias cp='cp --reflink=auto'
@@ -33,15 +57,3 @@ alias cfg-update='cfg pull && cfg submodule update --init --recursive'
 alias k='kubectl'
 alias d='docker'
 alias h='helm'
-
-# Restic backups
-alias mikoshi-ctl='sudo restic \
-    --password-file /home/evan/.config/restic/password.txt \
-    -r sftp::/data/souls/evan/Backups/silver \
-    -o sftp.command="ssh -i /home/evan/.ssh/id_rsa evan@mikoshi.edurfee.com -s sftp"'
-
-alias mikoshi-backup='mikoshi-ctl \
-    backup \
-    --one-file-system \
-    --exclude-file=/home/evan/.config/restic/excludes.txt \
-	/vol/userdata /home / '
