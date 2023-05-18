@@ -26,6 +26,8 @@ man() {
 }
 
 bat() {
+	# Read color-scheme info from $XDG_STATE_HOME/color-scheme
+	# Requires another program to put state data there
 	local color_scheme_file="${XDG_STATE_HOME:-"$HOME"/.local/state}"/color-scheme/variant
 	local color_scheme_variant
 	color_scheme_variant="$(cat "$color_scheme_file" 2>/dev/null)"
