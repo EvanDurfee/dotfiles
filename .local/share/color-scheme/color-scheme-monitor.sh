@@ -1,0 +1,1 @@
+../freedesktop-color-scheme-monitor/color-scheme/color-scheme-monitor.sh

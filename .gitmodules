@@ -1,3 +1,6 @@
 [submodule "clip"]
 	path = .local/share/clip
 	url = https://github.com/EvanDurfee/clip.git
+[submodule "freedesktop-color-scheme-monitor"]
+	path = .local/share/freedesktop-color-scheme-monitor
+	url = https://github.com/EvanDurfee/freedesktop-color-scheme-monitor.git
