@@ -31,21 +31,20 @@ fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
-# Add inherent scroll support to less
+
+# Add inherent scroll support to less / bat as desired
 # Means less will handle scrolling instead of the terminal emulator, which is
 #  required for scrolling in tmux to work (only works for graphical sessions).
+# However, if less takes control of the cursor, it is no longer possible to
+#  highlight and copy text from the terminal emulator.
+export LESS="-RF"
 if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
-	export LESS="-RF --mouse --wheel-lines=5"
-else
-	export LESS="-RF"
+#	export LESS="-RF --mouse --wheel-lines=5"
+	export BAT_PAGER="less -RF --mouse --wheel-lines=5"
+	export DELTA_PAGER="$BAT_PAGER"
 fi
 
 ## Application configs
-
-# Calibre
-# Force dark theme
-# export CALIBRE_USE_SYSTEM_THEME=0
-# export CALIBRE_USE_DARK_PALETTE=1
 
 # Exa
 # Make the detailed view less of a rainbow
@@ -59,7 +58,10 @@ export TIME_STYLE="long-iso"
 # You can also study my Dotfiles project: https://www.alchemists.io/projects/dotfiles.
 # ☿ 🜔 🜍 🜂 🜃 🜁 🜄
 
-
+# Initialize color-scheme files
+find "${XDG_DATA_HOME:-"$HOME"/.config}/color-scheme/scripts" -maxdepth 1 -type f -exec sh -c '
+		if ! "$1" --init >/dev/null 2>&1; then echo "Failed to run $1 --init"; fi
+	' sh {} \;
 
 ## ~/ cleanup (may need to create these folders / files manually)
 # Check here for updates: https://wiki.archlinux.org/index.php/XDG_Base_Directory

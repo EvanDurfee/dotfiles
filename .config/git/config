@@ -1,24 +1,29 @@
-[diff]
-	tool = kdiff3
-[merge]
-	tool = kdiff3
-[difftool]
-	prompt = false
-[alias]
-	hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
-	st = status
-[color]
-	ui = auto
 [core]
 	autocrlf = input
-	pager = type delta >/dev/null 2>&1 && exec delta || exec less -FR
+	pager = type delta >/dev/null 2>&1 && exec delta || exec less
 	editor = nano -b -r 72
+[interactive]
+    diffFilter = type delta >/dev/null 2>&1 && exec delta --color-only || exec less
+[color]
+    ui = auto
 [init]
-	defaultBranch = master
+    defaultBranch = master
+[diff]
+#   tool = kdiff3
+    colorMoved = default
+[merge]
+#   tool = kdiff3
+    conflictstyle = diff3
+[difftool]
+    prompt = false
 [pull]
 	ff = only
+[alias]
+    hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
+    st = status
 [delta]
 #	features = evan
+	navigate = true
 	line-numbers = true
 	side-by-side = false
 [delta "evan"]
@@ -28,6 +33,7 @@
 	# Local machine overrides
     # Include e.g. user, email info here
 	path = override.config
+	path = system-theme.config
 #[user]
 #    email =
 #    name =

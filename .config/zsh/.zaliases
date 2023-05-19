@@ -25,41 +25,6 @@ man() {
 	command man "$@"
 }
 
-bat() {
-	# Read color-scheme info from $XDG_STATE_HOME/color-scheme
-	# Requires another program to put state data there
-	local color_scheme_file="${XDG_STATE_HOME:-"$HOME"/.local/state}"/color-scheme/variant
-	local color_scheme_variant
-	color_scheme_variant="$(cat "$color_scheme_file" 2>/dev/null)"
-	local bat_theme=""
-	case "$color_scheme_variant" in
-		0)
-#			bat_theme="OneHalfLight"
-			bat_theme="Monokai Extended Light"
-#			bat_theme="Tomorrow"
-			;;
-		1)
-#			bat_theme="OneHalfDark"
-			bat_theme="Monokai Extended"
-#			bat_theme="Tomrrow Night"
-			;;
-	esac
-	if [ -z "$bat_theme" ]; then
-		command bat "$@"
-	else
-		command bat --theme "$bat_theme" "$@"
-	fi
-}
-
-
-# Enable build-in scrolling for less if possible
-# 
-if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
-	alias less="less -RF --mouse --wheel-lines=5"
-else
-	alias less="less -RF"
-fi
-
 # Better cp for COW supporting filesystems
 alias cp='cp --reflink=auto'
 
@@ -69,6 +34,9 @@ alias sudo='sudo '
 # Exa
 alias x='exa --all --long --header --group --group-directories-first'
 alias xt='x --tree'
+
+# Shorter open
+alias open='xdg-open'
 
 # saner defaults
 #alias cp="cp -i"                                                # Confirm before overwriting something

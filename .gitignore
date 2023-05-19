@@ -49,6 +49,13 @@
 /.config/zsh/.zoverride
 /.config/zsh/zoverride
 
+!/.local
+/.local/*
+!/.local/share
+/.local/share/*
+!/.local/share/color-scheme
+/.local/share/color-scheme/*
+!/.local/share/color-scheme/scripts
 
 # Ignore compiled zsh
 *.zwc

@@ -13,16 +13,27 @@ fi
 variant="$1"
 
 kitty_config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"/kitty
+light_theme="$kitty_config_dir"/light-theme.conf
+dark_theme="$kitty_config_dir"/dark-theme.conf
+system_theme="$kitty_config_dir"/system-theme.conf
 mkdir -p "$kitty_config_dir"
 
+if [ "$variant" = "--init" ]; then
+	if [ -e "$system_theme" ]; then
+		printf "Color scheme aready set, skipping init\n" >&2
+		exit 0
+	fi
+	variant=1
+fi
+
 case "$variant" in
-	0) target_theme="${KITTY_LIGHT_MODE_CONFIG:-light-theme.conf}";;
-	1) target_theme="${KITTY_DARK_MODE_CONFIG:-dark-theme.conf}";;
+	0) target_theme="$light_theme";;
+	1) target_theme="$dark_theme";;
 	*) printf "Unrecognized color-scheme variant %s\n" "$variant" >&2; exit 1;;
 esac
 
-printf "Setting kitty color scheme to %s\n" "$target_theme" >&2
-rm -f "$kitty_config_dir"/system-theme.conf
-ln -rs  "$kitty_config_dir"/"$target_theme"  "$kitty_config_dir"/system-theme.conf
+printf "Setting kitty color scheme to %s\n" "$(basename "$target_theme")" >&2
+rm -f "$system_theme"
+ln -rs "$target_theme" "$system_theme"
 printf "Signaling kitty to reload\n" >&2
 pkill -USR1 -f "$kitty"
