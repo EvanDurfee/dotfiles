@@ -18,7 +18,7 @@ if [ "$variant" = "--init" ]; then
 fi
 
 case "$variant" in
-	0) target_theme="$light_theme";;
+	0|2) target_theme="$light_theme";;
 	1) target_theme="$dark_theme";;
 	*) printf "Unrecognized color-scheme variant %s\n" "$variant" >&2; exit 1;;
 esac
