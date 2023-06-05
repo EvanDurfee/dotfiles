@@ -4,10 +4,15 @@
 # Updates a symlink to a kitty conf whenever the color-scheme variant changes
 # and reloads kitty.
 
+# Get which kitty to pgrep / pkill (or to skip this script if it isn't installed)
 kitty="$(which kitty 2>/dev/null)"
 if [ $? -ne 0 ]; then
 	printf "Kitty not installed, exiting\n" >&2
 	exit 0
+fi
+os_type="$(grep -E "^ID=" /etc/os-release | sed -E 's/^ID=//')"
+if [ "$os_type" = "ubuntu" ]; then
+	kitty=kitty
 fi
 
 variant="$1"
@@ -36,4 +41,4 @@ printf "Setting kitty color scheme to %s\n" "$(basename "$target_theme")" >&2
 rm -f "$system_theme"
 ln -rs "$target_theme" "$system_theme"
 printf "Signaling kitty to reload\n" >&2
-pkill -USR1 -f "$kitty"
+pkill -USR1 --full --exact --uid "$USER" "$kitty"
