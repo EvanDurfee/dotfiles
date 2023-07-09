@@ -21,6 +21,7 @@
 [alias]
     hist = log --pretty=format:'%C(auto)%h %ad | %s%d [%an]' --graph --date=short
     st = status
+	ls = ls-tree --full-tree --name-only -r HEAD
 [delta]
 #	features = evan
 	navigate = true

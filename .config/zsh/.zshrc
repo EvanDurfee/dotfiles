@@ -213,6 +213,13 @@ fi
 fpath=( "${ZDOTDIR:-$HOME}/functions" "${fpath[@]}" )
 autoload -Uz $fpath[1]/*(.:t)
 
+# Add ubuntu completions path
+# docker is hardcoded to use this even on fedora
+if [ -d /usr/share/zsh/vendor-completions ]; then
+	fpath=( /usr/share/zsh/vendor-completions "${fpath[@]}" )
+	autoload -Uz $fpath[1]/*(.:t)
+fi
+
 # Zoxide hooks
 if hash zoxide 2>/dev/null; then
    znap eval zoxide 'zoxide init zsh'
