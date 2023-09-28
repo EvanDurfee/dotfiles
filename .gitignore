@@ -10,6 +10,7 @@
 # whitelist configs dir, but blacklist contents
 !/.config/
 /.config/*
+!/.config/aacs
 !/.config/bat
 # whitelist individual configs
 # Use VS Code sync instead
