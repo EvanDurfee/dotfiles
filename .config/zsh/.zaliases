@@ -32,6 +32,9 @@ alias cp='cp --reflink=auto'
 alias sudo='sudo '
 
 # Exa
+if hash eza 2>/dev/null; then
+	alias exa='eza'
+fi
 alias x='exa --all --long --header --group --group-directories-first'
 alias xt='x --tree'
 
