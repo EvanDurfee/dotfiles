@@ -41,6 +41,7 @@
 /.config/systemd/user/*
 !/.config/systemd/user/proton-bridge.service
 !/.config/vim
+!/.config/vivaldi-custom-css
 !/.config/wget
 !/.config/zsh
 /.config/zsh/.zcompdump

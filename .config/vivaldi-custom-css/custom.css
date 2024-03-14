@@ -1,0 +1,24 @@
+* {
+	/*font-family: font_name;*/
+	/*font-size: 15px;*/
+}
+
+#browser, #browser + div, #browser + div + div {
+	font-size: 15px;
+}
+
+.bookmark-bar .observer button {
+	font-size: 14px;
+	font-weight: bold;
+}
+.tab-strip .tab-header {
+	font-size: 15px;
+}
+.UrlField, .OmniDropdown, .SearchField {
+	font-size: 16px;
+	padding-bottom: 2px;
+}
+.OmniLinkItem-Url{
+	height: 16px;
+	overflow: visible;
+}
