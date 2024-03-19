@@ -222,7 +222,7 @@ fi
 
 # Zoxide hooks
 if hash zoxide 2>/dev/null; then
-   znap eval zoxide 'zoxide init zsh'
+	znap eval zoxide 'zoxide init --cmd cd zsh'
 fi
 
 ## Cache completions if the applications are present
