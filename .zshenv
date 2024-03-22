@@ -6,4 +6,5 @@
 skip_global_compinit=1
 
 ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}"/zsh
+#ZDOTDIR=$HOME/tmp
 [ -r "$ZDOTDIR"/.zshenv ] && source "$ZDOTDIR"/.zshenv

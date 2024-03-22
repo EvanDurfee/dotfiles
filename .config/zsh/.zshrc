@@ -13,31 +13,14 @@ if [ -z "$XDG_DATA_HOME" ] || [ -z "$XDG_CONFIG_HOME" ]; then
 fi
 
 # Add named directory zsh
-hash -d zsh="$ZDOTDIR"
+hash -d zsh="${ZDOTDIR:-$HOME}"
 
-# Set the location for our zsh plugin downloads
-zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh-snap
-# automatically compile loaded zsh files
-zstyle ':znap:*' auto-compile yes
-
-# Install the ZSH plugin manager
-if [ ! -d "$XDG_DATA_HOME"/zsh-snap/zsh-snap ]; then
-	mkdir -p "$XDG_DATA_HOME"/zsh-snap/
-	git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git "$XDG_DATA_HOME"/zsh-snap/zsh-snap
-fi
-
-# Load znap for plugin management
-source "$XDG_DATA_HOME"/zsh-snap/zsh-snap/znap.zsh
-
-# Load the actual prompt
-znap source romkatv/powerlevel10k
-
-# Prepare the LS_COLORS variable (clear the cache if changing the config)
-znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf"'
+# Prepare the LS_COLORS variable
+eval "$(dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf")"
 # znap eval dircolors 'dircolors -b "$XDG_CONFIG_HOME/dircolors/trapd00r_LS_COLORS.conf"'
 
 
-# If running kitty terminal, add integration
+# If running kitty terminal, add integration (kitty ignores this is running in tmux)
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="no-cursor"
     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
@@ -58,11 +41,12 @@ setopt numericglobsort                                          # Sort filenames
 setopt nobeep                                                   # No beep
 
 
-WORDCHARS=${WORDCHARS//[\/;]}                                   # Don't consider / or ; as wordchars
+WORDCHARS=${WORDCHARS//[\/;.]}                                   # Don't consider / or ; as wordchars
 autoload -U select-word-style
 select-word-style normal                                        # Set to "bash" to ignore WORDCHARS and use only alphanumerics
 
 # Completions
+autoload -Uz compinit
 zstyle ':completion:*' completer _complete                      # Do not expand variables while completing
 # zstyle ':completion:*' completer _expand _complete              # If present, expand the variable under the cursor instead of completing
 # zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
@@ -101,8 +85,6 @@ setopt pushd_to_home                                            # pushd with no 
 setopt pushd_ignore_dups                                        # Don't push multiple copies of the same dir
 setopt pushd_minus                                              # Swap meaning of + and - (- will index from the top of the stack, + from the bottom)
 DIRSTACKSIZE=20
-
-
 
 
 ## Keybindings
@@ -146,7 +128,39 @@ bindkey '^[[Z' reverse-menu-complete                            # Shift+tab to j
 autoload -U colors zcalc
 colors
 
+
 ## Plugins section
+# Load light plugin manager
+source "${ZDOTDIR}/antidote.lite.zsh"
+
+prompt_plugin=romkatv/powerlevel10k
+plugin-clone $prompt_plugin && plugin-load $prompt_plugin
+
+plugins=(
+	# prompt
+	# romkatv/powerlevel10k
+
+	# Load additional completions
+	zsh-users/zsh-completions
+	# Fish style inline suggestions. Defaults to latest matching history, but can also use completions
+	zsh-users/zsh-autosuggestions
+
+	# Adds automatic enviornment loading and unloading (including functions, etc.)
+	Tarrasch/zsh-autoenv
+	# Adds the ability to customize the 256 basic terminal colors
+	chriskempson/base16-shell
+	# Adds a function and widget for searching history with fuzzy matching
+#	joshskidmore/zsh-fzf-history-search
+	# Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
+	zsh-users/zsh-syntax-highlighting
+	# History substring search (must come after syntax highligting)
+	zsh-users/zsh-history-substring-search
+)
+
+plugin-clone $plugins && plugin-load $plugins
+
+
+
 
 # Ideas:
 # zsh-edit (adds hotkeys for going forwar / back dirs, binding hotkeys to commands... but some other stuff I don't like)
@@ -161,10 +175,10 @@ colors
 # znap source lincheney/fzf-tab-completion
 
 # Load additional completions
-znap source zsh-users/zsh-completions
+# znap source zsh-users/zsh-completions
 
 # Fish style inline suggestions. Defaults to latest matching history, but can also use completions
-znap source zsh-users/zsh-autosuggestions
+#DISznap source zsh-users/zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8"
 # Only use match_prev_cmd if history order is preserved
 # ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history)
@@ -175,10 +189,10 @@ ZSH_AUTOSUGGEST_STRATEGY=(history)
 # znap source zpm-zsh/clipboard
 
 # Adds automatic enviornment loading and unloading (including functions, etc.)
-znap source Tarrasch/zsh-autoenv
+#DISznap source Tarrasch/zsh-autoenv
 
 # Adds the ability to customize the 256 basic terminal colors
-znap source chriskempson/base16-shell
+#DISznap source chriskempson/base16-shell
 
 # DISABLED: serious errors with parsing some flags (e.g. interprets --verbose as --shred).
 # Adds a prompt to rm when deleting 3+ files, and allows recycling instead of de-indexing with the -c flag
@@ -192,13 +206,13 @@ znap source chriskempson/base16-shell
 # znap source evandurfee/zsh-fzf-history-search
 # bindkey '^r' fzf-history-search
 
-znap source joshskidmore/zsh-fzf-history-search
+# znap source joshskidmore/zsh-fzf-history-search
 
 # Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
-znap source zsh-users/zsh-syntax-highlighting
+# znap source zsh-users/zsh-syntax-highlighting
 
 # History substring search (must come after syntax highligting)
-znap source zsh-users/zsh-history-substring-search
+# znap source zsh-users/zsh-history-substring-search
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
 bindkey '^[[A' history-substring-search-up
@@ -220,21 +234,28 @@ if [ -d /usr/share/zsh/vendor-completions ]; then
 	autoload -Uz $fpath[1]/*(.:t)
 fi
 
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+
 # Zoxide hooks
 if hash zoxide 2>/dev/null; then
-	znap eval zoxide 'zoxide init --cmd cd zsh'
+#DIS	znap eval zoxide 'zoxide init --cmd cd zsh'
+	eval "$(zoxide init --cmd cd zsh)"
 fi
 
 ## Cache completions if the applications are present
 if hash kubectl 2>/dev/null; then
-	znap fpath _kubectl 'kubectl completion zsh'
+#DIS	znap fpath _kubectl 'kubectl completion zsh'
 fi
 if hash helm 2>/dev/null; then
-	znap fpath _helm    'helm completion zsh'
+#DIS	znap fpath _helm    'helm completion zsh'
 fi
 if hash rustup 2>/dev/null; then
-	znap fpath _rustup  'rustup completions zsh'
-	znap fpath _cargo   'rustup completions zsh cargo'
+#DIS	znap fpath _rustup  'rustup completions zsh'
+#DIS	znap fpath _cargo   'rustup completions zsh cargo'
 fi
 
 ## Load overrides
