@@ -31,12 +31,32 @@ alias cp='cp --reflink=auto'
 # Enable alias expansion when using sudo
 alias sudo='sudo '
 
-# Exa
+# Hack to support dark / light themes for eza
 if hash eza 2>/dev/null; then
-	alias exa='eza'
+	exa_wrapper() {
+		if ! [ -e "${XDG_CACHE_HOME:-$HOME/.cache}"/exa/colors ]; then
+			mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}"/exa
+			if [ -e  "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.config ]; then 
+				grep --extended-regexp --only-matching "^[^# $(printf '\t')]+" "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.config \
+						| tr '\n' ':' \
+						>  "${XDG_CACHE_HOME:-$HOME/.cache}"/exa/colors
+			else
+				echo "${EXA_COLORS}" > "${XDG_CACHE_HOME:-$HOME/.cache}"/exa/colors
+			fi
+		fi
+		EXA_COLORS="$(cat "${XDG_CACHE_HOME:-$HOME/.cache}"/exa/colors)" /usr/bin/eza "$@"
+	}
+	compdef _eza exa_wrapper
+	alias eza='exa_wrapper'
+	alias exa='exa_wrapper'
+
+	# Useful aliases
+	alias x='exa --all --long --header --group --group-directories-first'
+	alias xt='x --tree'
+	
+	# Questionable alias! If this breaks things in practice, maybe revert
+	alias ls='exa'
 fi
-alias x='exa --all --long --header --group --group-directories-first'
-alias xt='x --tree'
 
 # Shorter open
 alias open='xdg-open'
