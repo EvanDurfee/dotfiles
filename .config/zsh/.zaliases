@@ -29,7 +29,7 @@ man() {
 alias cp='cp --reflink=auto'
 
 # Enable alias expansion when using sudo
-alias sudo='sudo '
+# alias sudo='sudo '
 
 # Hack to support dark / light themes for eza
 if hash eza 2>/dev/null; then
