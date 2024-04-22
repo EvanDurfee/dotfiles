@@ -19,6 +19,8 @@ hash -d zsh="$ZDOTDIR"
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh-snap
 # automatically compile loaded zsh files
 zstyle ':znap:*' auto-compile yes
+# Disable auto git mainenance
+zstyle ':znap:*' git-maintenance off
 
 # Install the ZSH plugin manager
 if [ ! -d "$XDG_DATA_HOME"/zsh-snap/zsh-snap ]; then
