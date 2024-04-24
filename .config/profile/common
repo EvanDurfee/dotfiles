@@ -95,8 +95,18 @@ export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 # Anki
 # Anki is natively supported now, according to https://apps.ankiweb.net/docs/manual20.html#file-locations
 
+# Ansible
+export ANSIBLE_HOME="${XDG_CONFIG_HOME}/ansible"
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME}/ansible.cfg"
+export ANSIBLE_GALAXY_CACHE_DIR="${XDG_CACHE_HOME}/ansible/galaxy_cache"
+# The remote's ~/.ansible/tmp can be moved by setting remote_tmp = ${XDG_CONFIG_HOME}/ansible/tmp in an appropriate ansible.cfg.
+
 # Atom
 export ATOM_HOME="$XDG_DATA_HOME"/atom
+
+# AWS cli
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
 
 # Bash Completion
 export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
@@ -114,6 +124,9 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+# FFmpeg
+export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
 
 # GDB
 #if which gdb >/dev/null 2>&1; then
