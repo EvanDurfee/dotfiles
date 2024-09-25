@@ -131,6 +131,14 @@ bindkey '^[OB' down-line-or-history                             # Down
 bindkey '^[[5~' history-beginning-search-backward               # Page up key
 bindkey '^[[6~' history-beginning-search-forward                # Page down key
 
+# These are called elsewhere, but kept here for reference as they need to be
+# invoked for these bindings to work.
+# zmodload zsh/complist
+# zmodload zsh/terminfo
+bindkey -M menuselect $terminfo[kpp] backward-word              # Page up in menus
+bindkey -M menuselect $terminfo[knp] forward-word               # Pade down in menus
+
+
 # Navigate words with ctrl+arrow keys
 bindkey '^[Oc' forward-word                                     # Ctrl+right
 bindkey '^[Od' backward-word                                    # Ctrl+left
