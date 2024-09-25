@@ -202,7 +202,8 @@ znap source chriskempson/base16-shell
 # znap source evandurfee/zsh-fzf-history-search
 # bindkey '^r' fzf-history-search
 
-znap source joshskidmore/zsh-fzf-history-search
+# Disabled for now in favor of built-in zsh ctrl-r hook
+# znap source joshskidmore/zsh-fzf-history-search
 
 # Use syntax highlighting (Note: wants to be after anything that modifies the line buffer)
 znap source zsh-users/zsh-syntax-highlighting
@@ -228,6 +229,29 @@ autoload -Uz $fpath[1]/*(.:t)
 if [ -d /usr/share/zsh/vendor-completions ]; then
 	fpath=( /usr/share/zsh/vendor-completions "${fpath[@]}" )
 	autoload -Uz $fpath[1]/*(.:t)
+fi
+
+# Fzf hooks
+# When fzf 0.45+ is available, can replace enter:become:... with 'enter:accept-or-print-query'
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'enter:become:if [ -z {} ]; then echo {q}; else echo {}; fi'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | clip)+abort'
+  --color header:italic
+  --header 'Press CTRL-Y to copy command into clipboard'"
+if [ -e /usr/share/fzf/shell/key-bindings.zsh ]; then
+	source /usr/share/fzf/shell/key-bindings.zsh
+fi
+# Helper functions, not tab completions
+if [ -e /usr/share/fzf/shell/completion.zsh ]; then
+	source /usr/share/fzf/shell/completion.zsh
+fi
+# Fedora incorrectly treats the fzf completion.zsh file as completions
+# Despite the misleading name, fzf has no tab completions for zsh, this
+# file instead contains helper functions
+if [ -e /usr/share/zsh/site-functions/fzf ]; then
+	source /usr/share/zsh/site-functions/fzf
 fi
 
 # Zoxide hooks
