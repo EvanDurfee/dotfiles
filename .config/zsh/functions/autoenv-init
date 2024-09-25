@@ -5,9 +5,10 @@ emulate -L zsh
 setopt extended_glob warn_create_global typeset_silent \
 		no_short_loops rc_quotes no_auto_pushd
 
-local dir="${1:-$PWD}"
-local autoenv_file="$dir/${AUTOENV_FILE_ENTER:-autoenv.zsh}"
-local env_file="$dir/.env"
+dir="${1:-$PWD}"
+autoenv_file="$dir/${AUTOENV_FILE_ENTER:-autoenv.zsh}"
+env_file="$dir/.env"
+
 _autoenv_debug "Initializing ${autoenv_file:t} and ${env_file:t} in $dir"
 if [ -f "$autoenv_file" ]; then
 	echo "Unable to init; file '$autoenv_file' already exists" >&2
@@ -15,23 +16,45 @@ if [ -f "$autoenv_file" ]; then
 elif [ -f "$env_file" ]; then
 	echo "Unable to init; file '$env_file' already exists" >&2
 fi
+
 cat >"$autoenv_file" <<'EOF'
-local root="${autoenv_env_file:h}"
-if [[ $autoenv_event == 'enter' ]]; then
-	autoenv_source_parent
-	# Source a separate env file 
-	local env_file="$root"/.env
-	if [ ! -r "$env_file" ]; then
-		echo "File '$env_file' is not readable or does not exist" >&2
-		return 1
+# Silence pl10k warnings in case some invoked scripts write to stdout/err
+autostash POWERLEVEL9K_INSTANT_PROMPT=quiet
+# Run in an anonymous function so we can use local variables
+function() {
+	local root="${autoenv_env_file:h}"
+	# Check for python venv names
+	local venv="$root"/venv
+	[ ! -e "$venv" ] && venv="$root"/.venv || true
+	[ ! -e "$venv" ] && venv="" || true
+	if [[ $autoenv_event == 'enter' ]]; then
+		autoenv_source_parent
+		# Source a separate env file , if present
+		local env_file="$root"/.env
+		if [ -r "$env_file" ]; then
+			_autoenv_debug "Loading env file '$env_file'"
+			while read -r line; do
+				eval "autostash $line"
+			done < <(grep -E '^[^ \t#=]+=.+' "$env_file")
+		fi
+		# Python Virtualenv
+		if [ -n "$venv" ]; then
+			stash VIRTUAL_ENV="$venv"
+			echo "Activating virtualenv: $venv" >&2
+			autoenv_prepend_path "$venv"/bin
+		fi
 	else
-		_autoenv_debug "Loading env file '$env_file'"
-		while read -r line; do
-			eval "autostash $line"
-		done < <(grep -E '^[^ \t#=]+=.+' "$env_file")
+		# Python Virtualenv
+		if [ -n "$venv" ]; then
+			echo "Deactivating virtualenv: $venv"
+			# Simulate deactivate, but handle $PATH better
+			if ! autoenv_remove_path "$venv"/bin; then
+				echo "Warning: $venv/bin not found in \$PATH" >&2
+			fi
+			unstash VIRTUAL_ENV
+		fi
 	fi
-else
-fi
+}
 EOF
 touch "$env_file"
 chmod 600 "$autoenv_file" "$env_file"
