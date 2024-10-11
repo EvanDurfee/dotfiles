@@ -163,8 +163,8 @@ export KDEHOME="$XDG_CONFIG_HOME"/kde
 export KODI_DATA="$XDG_DATA_HOME/kodi"
 
 # Kubectl
-# DISABLED: config can be moved, but cache is hardcoded to ~/.kube
-# export KUBECONFIG="$XDG_CONFIG_HOME"/kube/config
+export KUBECONFIG="$XDG_CONFIG_HOME"/kube/config
+export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 
 # Less
 mkdir -p "$XDG_CACHE_HOME"/less
