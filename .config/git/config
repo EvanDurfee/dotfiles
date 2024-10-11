@@ -1,9 +1,9 @@
 [core]
 	autocrlf = input
-	pager = "diff_pager_wrapper() { if type delta >/dev/null 2>&1; then delta; else less; fi } && diff_pager_wrapper"
+    pager = "(type delta >/dev/null 2>&1 && exec delta || exec less)"
 	editor = nano -b -r 72
 [interactive]
-    diffFilter = "diff_filter_wrapper() { if type delta >/dev/null 2>&1; then delta --color-only; else less; fi } && diff_filter_wrapper"
+    diffFilter = "(type delta >/dev/null 2>&1 && exec delta --color-only || exec less)"
 [color]
     ui = auto
 [init]
