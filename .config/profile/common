@@ -11,8 +11,9 @@
 # "$ZDOTDIR"/.zprofile: [ -e ~/.profile ] && emulate sh -c 'source ~/.profile'
 
 # add .local/bin to path
-export PATH="$PATH:$HOME/.local/bin"
-
+export PATH="$HOME/.local/bin:$PATH"
+# add local golang to path, if present
+export PATH="/usr/local/lib/go/bin:/usr/local/go/bin:$PATH"
 
 ## Locale
 export LANG=en_US.utf8
