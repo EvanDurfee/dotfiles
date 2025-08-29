@@ -142,10 +142,15 @@ export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
 # mkdir -p "$GNUPGHOME"
 
 # GoLang
-mkdir -p "$XDG_DATA_HOME"/go
-mkdir -p "$XDG_CACHE_HOME"/go/mod
+# GOPATH is largely replaced by go modules, but is still a fallback
 export GOPATH="$XDG_DATA_HOME"/go
+# GO build cache (defaults to $XDG_CACHE_HOME/go-build)
+export GOCACHE="$XDG_CACHE_HOME"/go/build
+# GO module cache (defaults to $GOPATH/pkg)
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
+# GO binary install dir (defaults to $GOPATH/bin)
+export GOBIN="$HOME/.local/bin"
+mkdir -p "$GOPATH" "$GOCACHE" "GOMODCACHE" "$GOBIN"
 
 # Gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
