@@ -16,20 +16,17 @@ fi
 hash -d zsh="$ZDOTDIR"
 
 # Set the location for our zsh plugin downloads
-zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/zsh-snap
+zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/znap
 # automatically compile loaded zsh files
 zstyle ':znap:*' auto-compile yes
-# Disable auto git mainenance
-zstyle ':znap:*' git-maintenance off
 
 # Install the ZSH plugin manager
-if [ ! -d "$XDG_DATA_HOME"/zsh-snap/zsh-snap ]; then
-	mkdir -p "$XDG_DATA_HOME"/zsh-snap/
-	git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git "$XDG_DATA_HOME"/zsh-snap/zsh-snap
+if [ ! -f "$XDG_DATA_HOME"/znap/zsh-snap/znap.zsh ]; then
+	mkdir -p "$XDG_DATA_HOME"/znap
+	git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git "$XDG_DATA_HOME"/znap/zsh-snap
 fi
-
 # Load znap for plugin management
-source "$XDG_DATA_HOME"/zsh-snap/zsh-snap/znap.zsh
+source "$XDG_DATA_HOME"/znap/zsh-snap/znap.zsh
 
 # Load the actual prompt
 znap source romkatv/powerlevel10k
