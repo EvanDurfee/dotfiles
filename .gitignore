@@ -26,6 +26,7 @@
 # !/.config/gemrc
 !/.config/git
 /.config/git/override.config
+/.config/git/user.config
 !/.config/kitty
 !/.config/less
 # Use jetbrains' own settings sync instead
