@@ -150,7 +150,7 @@ export GOCACHE="$XDG_CACHE_HOME"/go/build
 export GOMODCACHE="$XDG_CACHE_HOME"/go/mod
 # GO binary install dir (defaults to $GOPATH/bin)
 export GOBIN="$HOME/.local/bin"
-mkdir -p "$GOPATH" "$GOCACHE" "GOMODCACHE" "$GOBIN"
+mkdir -p "$GOPATH" "$GOCACHE" "$GOMODCACHE" "$GOBIN"
 
 # Gradle
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
