@@ -7,3 +7,8 @@ fi
 if [[ $- == *i* && -f ~/.bashrc ]]; then
     . ~/.bashrc
 fi
+
+
+# Added by Toolbox App
+export PATH="$PATH:/var/home/evan/.local/share/JetBrains/Toolbox/scripts"
+

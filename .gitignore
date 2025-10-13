@@ -62,6 +62,6 @@
 !/.local/share/color-scheme
 /.local/share/color-scheme/*
 !/.local/share/color-scheme/scripts
-
+!/.local/share/org.gnome.Ptyxis
 # Ignore compiled zsh
 *.zwc
