@@ -1,0 +1,9 @@
+[dev]
+image=ghcr.io/evandurfee/fedora-dev-toolbox:latest
+# Set shell to zsh
+pre_init_hooks="export SHELL=/bin/zsh"
+# init_hooks="ln -s /run/host/run/systemd/system /run/systemd"
+init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman"
+init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak"
+init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open"
+# It seems like the $XDG_RUNTIME_DIR is mounted automatically, so the host's podman user socket is accessible

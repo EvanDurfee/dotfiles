@@ -1,0 +1,7 @@
+[cosign]
+image=quay.io/toolbx-images/alpine-toolbox:edge
+pull=true
+entry=false
+start_now=false
+additional_packages="cosign"
+exported_bins="/usr/bin/cosign"

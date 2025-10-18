@@ -1,0 +1,3 @@
+# Commit box configs as <box_name>.ini.disabled
+# Enable via ln -s ./box_name.ini.disabled ./box_name.ini
+*.ini
