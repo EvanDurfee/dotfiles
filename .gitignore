@@ -12,6 +12,7 @@
 /.config/*
 !/.config/aacs
 !/.config/bat
+!/.config/containers
 # whitelist individual configs
 # Use VS Code sync instead
 # !/.config/Code
