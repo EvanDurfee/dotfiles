@@ -1,7 +1,4 @@
 [calibre]
 image=ghcr.io/evandurfee/calibre-toolbox:latest
-# pull=true
-entry=false
-# start_now=true
 exported_apps="calibre"
 init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open"

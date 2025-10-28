@@ -1,9 +1,32 @@
 [dev]
-image=ghcr.io/evandurfee/fedora-dev-toolbox:latest
+# image=ghcr.io/evandurfee/fedora-dev-toolbox:latest
+image=localhost/fedora-dev-toolbox:testing
+# image=ghcr.io/evandurfee/fedora-ide-toolbox:testing
+
 # Set shell to zsh
 pre_init_hooks="export SHELL=/bin/zsh"
+
+# Mount host fonts
+# volume="/usr/share/fonts:/usr/share/fonts:ro"
+
+# Create persistent volume for Jetbrains IDE installation
+
+# volume="dev-toolbox-jetbrains-ides:/opt/JetBrains:rw"
+
+# Install jetbrains tools as user to XDG_DATA_HOME
+init_hooks='sudo -u "$(stat -c "%U" "$HOME")" jetbrains-ide-setup --install-dir "$HOME"/.local/share/JetBrains/apps --only-install idea goland pycharm clion rider rustrover'
+# Install jetbrains desktop and bin as root to system directories
+init_hooks='jetbrains-ide-setup --no-install --install-dir "$HOME"/.local/share/JetBrains/apps --desktop-dir=/usr/share/applications --bin-dir=/usr/bin --experimental-wl idea goland pycharm clion rider rustrover'
+# Export IDEs
+exported_apps='idea goland pycharm clion rider rustrover'
+# exported_bins='/usr/bin/idea /usr/bin/goland /usr/bin/pycharm /usr/bin/clion /usr/bin/rider /usr/bin/rustrover'
+
 # init_hooks="ln -s /run/host/run/systemd/system /run/systemd"
 init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman"
+init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/buildah"
+init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker"
 init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak"
 init_hooks="ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open"
 # It seems like the $XDG_RUNTIME_DIR is mounted automatically, so the host's podman user socket is accessible
+
+start_now=true

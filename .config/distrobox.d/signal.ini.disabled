@@ -1,8 +1,5 @@
 [signal]
 image=ghcr.io/evandurfee/signal-toolbox:latest
-pull=true
-entry=false
-start_now=true
 exported_apps="signal-desktop"
 init_hooks="mkdir -p /run/dbus"
 init_hooks="ln -fs /run/host/run/dbus/system_bus_socket /run/dbus"
