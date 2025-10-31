@@ -1,0 +1,20 @@
+[user]
+	name = 
+	email = 
+	signingKey = 
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[push]
+	gpgsign = if-asked
+[gpg]
+	format = openpgp
+
+# gpg setup:
+# create a simple non-expiring gpg key with your name, a comment, and associated email
+# gpg --batch --passphrase '' --quick-generate-key "Evan Durfee (git signing) <edurfee@pm.me>" Ed25519 sign never
+# set user.signingKey to the new key id
+# key_id="$(gpg --list-secret-keys --with-colons "(git signing) <edurfee@pm.me>" | grep sec | sed -E 's/([^:]*:){4}([^:]+):.*/\2/')" && echo "$key_id"
+# export the public key" and copy to the git remote
+# gpg --armor --export "$key_id"

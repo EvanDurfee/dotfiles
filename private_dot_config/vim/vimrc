@@ -1,0 +1,42 @@
+## Use XDG dirs
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+set packpath^=$XDG_DATA_HOME/vim,$XDG_CONFIG_HOME/vim
+set packpath+=$XDG_CONFIG_HOME/vim/after,$XDG_DATA_HOME/vim/after
+
+let g:netrw_home = $XDG_DATA_HOME."/vim"
+call mkdir($XDG_DATA_HOME."/vim/spell", 'p')
+set viewdir=$XDG_DATA_HOME/vim/view | call mkdir(&viewdir, 'p')
+
+set backupdir=$XDG_CACHE_HOME/vim/backup | call mkdir(&backupdir, 'p')
+set directory=$XDG_CACHE_HOME/vim/swap   | call mkdir(&directory, 'p')
+set undodir=$XDG_CACHE_HOME/vim/undo     | call mkdir(&undodir,   'p')
+
+if !has('nvim') | set viminfofile=$XDG_CACHE_HOME/vim/viminfo | endif
+
+## General
+set number	# Show line numbers
+set linebreak	# Break lines at word (requires Wrap lines)
+set showbreak=+++ 	# Wrap-broken line prefix
+set textwidth=100	# Line wrap (number of cols)
+set showmatch	# Highlight matching brace
+set visualbell	# Use visual bell (no beeping)
+ 
+set hlsearch	# Highlight all search results
+set smartcase	# Enable smart-case search
+set ignorecase	# Always case-insensitive
+set incsearch	# Searches for strings incrementally
+ 
+set autoindent	# Auto-indent new lines
+set shiftwidth=4	# Number of auto-indent spaces
+set smartindent	# Enable smart-indent
+set smarttab	# Enable smart-tabs
+set softtabstop=4	# Number of spaces per Tab
+ 
+## Advanced
+set ruler	# Show row and column ruler information
+ 
+set undolevels=1000	# Number of undo levels
+set backspace=indent,eol,start	# Backspace behaviour

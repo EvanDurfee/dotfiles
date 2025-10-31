@@ -1,0 +1,14 @@
+set bell-style none
+
+"\e[2~": overwrite-mode
+
+"\e[1;5B": end-of-line
+"\e[1;5A": beginning-of-line
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+
+"\e[3;5~": kill-word
+"\C-h": backward-kill-word
