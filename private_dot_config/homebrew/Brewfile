@@ -1,0 +1,43 @@
+# Mono Fonts
+cask "font-fira-code-nerd-font"
+cask "font-meslo-lg-nerd-font"
+cask "font-hack-nerd-font"
+
+# System Fonts
+cask "font-lato"
+cask "font-lexend"
+
+# CLI tools
+brew "evandurfee/tap/clip"
+
+brew "bat"
+brew "chezmoi"
+brew "eza"
+brew "fd"
+brew "fzf"
+brew "git-delta"
+brew "just"
+brew "jq"
+brew "p7zip"
+brew "ripgrep"
+brew "starship"
+brew "tmux"
+brew "yq"
+brew "zoxide"
+
+# Desktop Utils
+# restart_service: true will also start the service on fresh install :)
+brew "evandurfee/tap/freedesktop-color-scheme-monitor", restart_service: true
+
+# Dev Tools
+# tap "evandurfee/tap"
+cask "evandurfee/tap/jetbrains-clion"
+cask "evandurfee/tap/jetbrains-datagrip"
+cask "evandurfee/tap/jetbrains-goland"
+cask "evandurfee/tap/jetbrains-idea"
+cask "evandurfee/tap/jetbrains-pycharm"
+cask "evandurfee/tap/jetbrains-rider"
+cask "evandurfee/tap/jetbrains-rubymine"
+cask "evandurfee/tap/jetbrains-rustrover"
+# brew "mise"
+# brew "uv"

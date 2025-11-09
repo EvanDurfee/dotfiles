@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# hash: {{ include "private_dot_config/homebrew/Brewfile" | sha256sum }}
+brew bundle install --file={{ joinPath .chezmoi.sourceDir "private_dot_config/homebrew/Brewfile" | quote }}
