@@ -1,0 +1,15 @@
+# Update with dconf dump /org/gnome/Ptyxis/ > ptyxis.conf
+# Apply with dconf load /org/gnome/Ptyxis/ < ptyxis.conf
+[/]
+default-profile-uuid='2871e8027773ae74d6c87a5f659bbc74'
+profile-uuids=['2871e8027773ae74d6c87a5f659bbc74']
+use-system-font=true
+window-size=(uint32 153, uint32 32)
+
+[Profiles/2871e8027773ae74d6c87a5f659bbc74]
+custom-command='/bin/zsh'
+label='Evan'
+opacity=0.94999999999999996
+palette='Tomorrow Night Custom'
+scrollback-lines=80000
+use-custom-command=true
