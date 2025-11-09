@@ -181,6 +181,25 @@ export LESSKEY="$XDG_DATA_HOME/less/lesskey"
 export XCOMPOSEFILE="$XDG_CONFIG_HOME"/X11/xcompose
 export XCOMPOSECACHE="$XDG_CACHE_HOME"/X11/xcompose
 
+# JetBrains
+# Set the VMOPTIONS to a static location instead of per-IDE and version
+export CLION_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export CLION_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export DATAGRIP_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export DATAGRIP_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export IDEA_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export IDEA_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export GOLAND_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export GOLAND_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export PYCHARM_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export PYCHARM_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export RIDER_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export RIDER_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export RUBYMINE_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export RUBYMINE_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+export RUSTROVER_VM_OPTIONS="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/jetbrains64.vmoptions
+export RUSTROVER_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea.properties
+
 # Maven
 # More work than it's worth to change (other apps may still use .m2 anyway)
 # Cannot be set via env; requires the settings flag and the following settings:
