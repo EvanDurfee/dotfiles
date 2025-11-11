@@ -28,6 +28,8 @@ brew "zoxide"
 # Desktop Utils
 # restart_service: true will also start the service on fresh install :)
 brew "evandurfee/tap/freedesktop-color-scheme-monitor", restart_service: true
+brew "evandurfee/tap/flatpak-installation-sync"
+
 
 # Dev Tools
 # tap "evandurfee/tap"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# hash: {{ include "private_dot_config/flatpak-sync/config.yaml" | sha256sum }}
+flatpak-installation-sync install --file={{ joinPath .chezmoi.sourceDir "private_dot_config/flatpak-sync/config.yaml" | quote }}

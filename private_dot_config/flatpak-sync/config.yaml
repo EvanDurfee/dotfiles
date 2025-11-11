@@ -1,0 +1,77 @@
+# Remove the fedora flatpak repos
+- repo:
+    name: fedora
+    remove: true
+- repo:
+    name: fedora-testing
+    remove: true
+# Add flathub and standard apps
+- repo:
+    url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    name: flathub
+    title: Flathub
+    enabled: true
+  install:
+    - org.gtk.Gtk3theme.adw-gtk3
+    - org.gtk.Gtk3theme.adw-gtk3-dark
+    - dev.qwery.AddWater
+    - io.github.Foldex.AdwSteamGtk
+      # Gnome Standard Utils
+    - org.gnome.Calculator
+    - org.gnome.Calendar
+    - org.gnome.Characters
+    - org.gnome.Connections
+    - org.gnome.Contacts
+    - org.gnome.FileRoller
+    - org.gnome.Firmware
+    - org.gnome.Logs
+    - org.gnome.Loupe
+    - org.gnome.Maps
+    - org.gnome.NautilusPreviewer
+    - org.gnome.Papers
+    - org.gnome.Snapshot
+    - org.gnome.TextEditor
+    - org.gnome.Weather
+    - org.gnome.baobab
+    - org.gnome.clocks
+    - org.gnome.font-viewer
+      # Extra system utils
+    - io.github.kolunmi.Bazaar
+    - com.github.tchx84.Flatseal
+    - io.github.flattool.Warehouse
+    - io.missioncenter.MissionCenter
+    - com.mattjakeman.ExtensionManager
+    - com.usebottles.bottles
+      # Office stuff
+#    - org.libreoffice.LibreOffice
+    - org.onlyoffice.desktopeditors
+      # Image Editing
+    - org.gimp.GIMP
+    - com.github.PintaProject.Pinta
+      # Video
+    - com.github.rafostar.Clapper
+    - com.github.rafostar.Clapper.Enhancers
+      # Gaming
+    - com.valvesoftware.Steam
+    - com.heroicgameslauncher.hgl
+    - com.vysp3r.ProtonPlus
+    - com.github.Matoking.protontricks
+      # Chat
+    - com.discordapp.Discord
+    - org.signal.Signal
+      # Books
+    - com.calibre_ebook.calibre
+      # Dev Tools
+    - de.leopoldluley.Clapgrep
+    - io.gitlab.adhami3310.Impression
+    - me.iepure.devtoolbox
+    - sh.loft.devpod
+    - io.podman_desktop.PodmanDesktop
+  uninstall:
+    - io.github.ronniedroid.concessio  # No need for a chmod guide
+    - org.gnome.Evince  # Replaced by org.gnome.Papers
+    - org.fedoraproject.MediaWriter  # Replaced by io.gitlab.adhami3310.Impression
+    - page.tesk.Refine  # Use gnome tweaks for now
+    - com.ranfdev.DistroShelf  # Use CLI tools instead?
+    - io.github.flattool.Ignition  # use gnome tweaks for startup apps
+    - io.github.getnf.embellish  # Use brew for fonts
