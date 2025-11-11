@@ -1,0 +1,18 @@
+#!/bin/zsh
+# Standard function opts
+emulate -L zsh
+setopt extended_glob warn_create_global typeset_silent \
+        no_short_loops rc_quotes no_auto_pushd pipefail
+
+if [ "$#" -ne 1 ]; then
+  echo "Incorrect number of arguments"
+  return 1
+fi
+
+local address="$1"
+shift
+
+
+
+curl --insecure -vvI "$address" 2>&1 \
+    | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
