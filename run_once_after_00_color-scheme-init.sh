@@ -3,6 +3,12 @@
 set -euo pipefail
 
 # Initialize freedesktop-color-scheme-monitor symlinks
+cat <<'EOF'
+===================================================
+Initialize color-scheme symlinks to dark mode
+===================================================
+EOF
+
 
 # bat
 if ! [ -e "${XDG_CONFIG_HOME:-"$HOME"/.config}"/bat/config ]; then

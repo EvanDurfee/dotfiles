@@ -9,7 +9,7 @@ window-size=(uint32 153, uint32 32)
 [Profiles/2871e8027773ae74d6c87a5f659bbc74]
 custom-command='/bin/zsh'
 label='Evan'
-opacity=0.94999999999999996
-palette='Tomorrow Night Custom'
-scrollback-lines=80000
+opacity=0.95
+palette='tomorrow-night-dynamic'
+scrollback-lines=120000
 use-custom-command=true

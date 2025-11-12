@@ -2,7 +2,14 @@
 
 # hash: {{ include "dconf/org.gnome.Ptyxis" | sha256sum }}
 # hash: {{ include "dconf/org.gnome.desktop" | sha256sum }}
+cat <<'EOF'
+===================================================
+Load dconf settings
+===================================================
+EOF
 
 while IFS= read -r f; do
-	echo dconf load /"$(basename "$f" | sed 's|\.|/|g')" \< "$f"
+	dconf_path=/"$(basename "$f" | sed 's|\.|/|g')"/
+	echo "Loading $dconf_path from $f"
+	dconf load "$dconf_path" < "$f"
 done < <(find {{ joinPath .chezmoi.sourceDir "dconf" | quote }} -mindepth 1 -maxdepth 1 -name "*" -type f)
