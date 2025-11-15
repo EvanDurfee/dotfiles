@@ -1,3 +1,5 @@
+tap "evandurfee/tap"
+
 # Mono Fonts
 cask "font-fira-code-nerd-font"
 cask "font-meslo-lg-nerd-font"
@@ -33,7 +35,6 @@ brew "syncthing", restart_service: true
 # brew "bitwarden-cli" # Use the flatpak
 
 # Dev Tools
-# tap "evandurfee/tap"
 cask "evandurfee/tap/jetbrains-clion"
 cask "evandurfee/tap/jetbrains-datagrip"
 cask "evandurfee/tap/jetbrains-goland"
