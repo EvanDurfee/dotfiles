@@ -1,1 +1,1 @@
-[ -e ~/.profile ] && emulate sh -c 'source ~/.profile'
+[ -e ~/.config/profile/common ] && emulate sh -c 'source ~/.config/profile/common'

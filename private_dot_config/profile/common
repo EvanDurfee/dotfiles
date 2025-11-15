@@ -41,20 +41,11 @@ export LC_TIME=C.UTF-8
 
 ## Application defaults
 export EDITOR="nano"
-if hash kitty 2>/dev/null; then
-	export TERMINAL="kitty"
-elif hash tilix 2>/dev/null; then
-	export TERMINAL="tilix"
-fi
 export BROWSER="firefox"
-if hash gnome-text-editor 2>/dev/null; then
-	export KUBE_EDITOR="gnome-text-editor"
-elif hash gedit 2>/dev/null; then
-	export KUBE_EDITOR="gedit"
-fi
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # Add inherent scroll support to less / bat as desired
 # Means less will handle scrolling instead of the terminal emulator, which is
@@ -125,6 +116,9 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 
 # Docker
 export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+
+# DotNet
+export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 
 # FFmpeg
 export FFMPEG_DATADIR="$XDG_CONFIG_HOME"/ffmpeg
