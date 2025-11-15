@@ -15,6 +15,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # add local golang to path, if present
 export PATH="/usr/local/lib/go/bin:/usr/local/go/bin:$PATH"
 
+# Use Bitwarden SSH agent
+export SSH_AUTH_SOCK="$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+
 ## Locale
 export LANG=en_US.utf8
 export LANGUAGE="en_US:en:C"

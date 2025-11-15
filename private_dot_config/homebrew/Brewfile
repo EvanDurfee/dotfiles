@@ -30,6 +30,7 @@ brew "zoxide"
 brew "evandurfee/tap/freedesktop-color-scheme-monitor", restart_service: true
 brew "evandurfee/tap/flatpak-installation-sync"
 brew "syncthing", restart_service: true
+# brew "bitwarden-cli" # Use the flatpak
 
 # Dev Tools
 # tap "evandurfee/tap"

@@ -1,5 +1,8 @@
 ## Common aliases
 
+# Bitwarden flatpak CLI
+alias bw="flatpak run --command=bw com.bitwarden.desktop"
+
 # Enable colors
 alias ls='ls --color=auto'
 alias ll='ls -l'

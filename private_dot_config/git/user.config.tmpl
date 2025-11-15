@@ -1,0 +1,19 @@
+[user]
+	name = {{ .name | quote }}
+	email = {{ .email | quote }}
+	# Full SSH public key or gpg key ID
+	signingKey = {{ .gitSigningKey | quote }}
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[push]
+	gpgsign = if-asked
+[gpg]
+	# ssh or openpgp
+	format = {{ .gitSigningFormat }}
+{{- if eq .gitSigningFormat "ssh" }}
+[gpg "ssh"]
+	# If using ssh, keys to be used for signing must be enumerated
+    allowedSignersFile = {{ .chezmoi.homeDir | quote }}/.ssh/allowed_signers
+{{- end }}

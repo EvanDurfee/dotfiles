@@ -1,0 +1,6 @@
+# Trusted ssh signing keys
+# See https://man7.org/linux/man-pages/man1/ssh-keygen.1.html#ALLOWED_SIGNERS
+# e.g. git-email@web.local ssh-ed25519 <public signing key>
+{{- if eq .gitSigningFormat "ssh" }}
+{{ .email }} {{ .gitSigningKey }}
+{{- end }}

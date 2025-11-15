@@ -36,6 +36,7 @@
     - org.gnome.clocks
     - org.gnome.font-viewer
       # Extra system utils
+    - com.bitwarden.desktop
     - io.github.kolunmi.Bazaar
     - com.github.tchx84.Flatseal
     - io.github.flattool.Warehouse
