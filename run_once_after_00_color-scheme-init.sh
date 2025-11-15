@@ -9,6 +9,8 @@ Initialize color-scheme symlinks to dark mode
 ===================================================
 EOF
 
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
 
 # bat
 if ! [ -e "${XDG_CONFIG_HOME:-"$HOME"/.config}"/bat/config ]; then

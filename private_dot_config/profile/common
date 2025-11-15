@@ -298,3 +298,5 @@ export _ZO_DATA_DIR="$XDG_CACHE_HOME"/zoxide
 
 ## Overrides
 [ -e "$XDG_CONFIG_HOME/profile/override" ] && . "$XDG_CONFIG_HOME/profile/override"
+
+export DOTFILES_PROFILE_LOADED=true

@@ -7,5 +7,7 @@ Install Flatpaks
 ===================================================
 EOF
 
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
 
 flatpak-installation-sync install --file={{ joinPath .chezmoi.sourceDir "private_dot_config/flatpak-sync/config.yaml" | quote }}

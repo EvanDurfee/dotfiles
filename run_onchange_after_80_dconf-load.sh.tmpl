@@ -8,6 +8,9 @@ Load dconf settings
 ===================================================
 EOF
 
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
+
 while IFS= read -r f; do
 	dconf_path=/"$(basename "$f" | sed 's|\.|/|g')"/
 	echo "Loading $dconf_path from $f"
