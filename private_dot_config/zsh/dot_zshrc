@@ -15,6 +15,11 @@ fi
 # Add named directory zsh
 hash -d zsh="$ZDOTDIR"
 
+# Use Bitwarden SSH agent
+if [ -e "$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock ]; then
+	export SSH_AUTH_SOCK="$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+fi
+
 # Set the location for our zsh plugin downloads
 zstyle ':znap:*' plugins-dir "$XDG_DATA_HOME"/znap
 # automatically compile loaded zsh files

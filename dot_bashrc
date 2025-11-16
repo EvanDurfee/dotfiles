@@ -4,6 +4,11 @@
 
 [[ $- != *i* ]] && return
 
+# Use Bitwarden SSH agent
+if [ -e "$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock ]; then
+    export SSH_AUTH_SOCK="$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+fi
+
 colors() {
 	local fgc bgc vals seq0
 
