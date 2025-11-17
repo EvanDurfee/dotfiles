@@ -36,13 +36,13 @@ brew "syncthing", restart_service: true
 # brew "bitwarden-cli" # Use the flatpak
 
 # IDEs
-cask "evandurfee/tap/jetbrains-clion"
-cask "evandurfee/tap/jetbrains-datagrip"
-cask "evandurfee/tap/jetbrains-goland"
-cask "evandurfee/tap/jetbrains-idea"
-cask "evandurfee/tap/jetbrains-pycharm"
-cask "evandurfee/tap/jetbrains-rider"
-cask "evandurfee/tap/jetbrains-rubymine"
-cask "evandurfee/tap/jetbrains-rustrover"
+cask "evandurfee/tap/clion-linux"
+cask "evandurfee/tap/datagrip-linux"
+cask "evandurfee/tap/goland-linux"
+cask "evandurfee/tap/intellij-idea-linux"
+cask "evandurfee/tap/pycharm-linux"
+cask "evandurfee/tap/rider-linux"
+cask "evandurfee/tap/rubymine-linux"
+cask "evandurfee/tap/rustrover-linux"
 # brew "mise"
 # brew "uv"
