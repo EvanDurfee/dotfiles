@@ -24,9 +24,14 @@ brew "jq"
 brew "p7zip"
 brew "ripgrep"
 brew "starship"
+brew "trash-cli"
 brew "tmux"
 brew "yq"
 brew "zoxide"
+
+brew "libheif"
+brew "imagemagick"
+
 
 # Desktop Utils
 # restart_service: true will also start the service on fresh install :)
