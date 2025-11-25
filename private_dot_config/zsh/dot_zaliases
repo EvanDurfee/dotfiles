@@ -1,7 +1,13 @@
 ## Common aliases
 
 # Bitwarden flatpak CLI
-alias bw="flatpak run --command=bw com.bitwarden.desktop"
+if flatpak info com.bitwarden.desktop >/dev/null 2>&1; then
+	bw_shim() {
+		flatpak run --command=bw com.bitwarden.desktop "$@"
+	}
+	compdef _bw bw_shim
+	alias bw='bw_shim'
+fi
 
 # Enable colors
 alias ls='ls --color=auto'
@@ -69,10 +75,13 @@ alias open='xdg-open'
 #alias df='df -h'                                                # Human-readable sizes
 #alias free='free -m'                                            # Show sizes in MB
 
+alias sctl='systemctl'
+alias jctl='journalctl'
 alias userctl='systemctl --user'
 
-alias cfg='/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
-alias cfg-update='cfg pull && cfg submodule update --init --recursive'
+alias cfg='chezmoi'
+#alias cfg='/bin/git --git-dir=$HOME/.local/share/dotfiles --work-tree=$HOME'
+#alias cfg-update='cfg pull && cfg submodule update --init --recursive'
 
 alias k='kubectl'
 alias d='docker'
