@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# Initialize freedesktop-color-scheme-monitor symlinks
+# Remove default zshrc and zshprofile
 cat <<'EOF'
 ===================================================
 Remove default .zsh profile

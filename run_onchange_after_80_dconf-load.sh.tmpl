@@ -1,7 +1,10 @@
 #!/bin/bash
 
-# hash: {{ include "dconf/org.gnome.Ptyxis" | sha256sum }}
-# hash: {{ include "dconf/org.gnome.desktop" | sha256sum }}
+{{ range (glob (joinPath .chezmoi.sourceDir "dconf/*")) -}}
+{{ if eq (stat .).type "file" -}}
+    # {{ . }} hash: {{ includeTemplate . | sha256sum }}
+{{ end -}}
+{{ end }}
 cat <<'EOF'
 ===================================================
 Load dconf settings
