@@ -1,0 +1,25 @@
+#!/bin/bash
+
+{{ range (glob (joinPath .chezmoi.sourceDir "udev/*")) -}}
+{{ if eq (stat .).type "file" -}}
+    # {{ . }} hash: {{ includeTemplate . | sha256sum }}
+{{ end -}}
+{{ end }}
+cat <<'EOF'
+===================================================
+Copy over udev rules
+===================================================
+EOF
+
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
+
+# Copy over udev rules
+while IFS= read -r f; do
+	rule="$(basename "$f")"
+	echo "Installing udev rule $rule"
+	sudo cp "$f" /etc/udev/rules.d/"$rule"
+done < <(find {{ joinPath .chezmoi.sourceDir "udev" | quote }} -mindepth 1 -maxdepth 1 -name "*" -type f)
+echo "Reloading udev rules"
+sudo udevadm control --reload-rules
+
