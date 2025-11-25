@@ -29,9 +29,12 @@ brew "tmux"
 brew "yq"
 brew "zoxide"
 
+# Image manipulation
 brew "libheif"
 brew "imagemagick"
 
+# Keyboard firmware flashing
+brew "dfu-util"
 
 # Desktop Utils
 # restart_service: true will also start the service on fresh install :)
