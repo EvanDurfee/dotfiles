@@ -1,3 +1,5 @@
+.zprofile
+.zshrc
 .config/exa
 .config/profile
 .local/share/color-scheme/scripts/update_exa_theme.sh
