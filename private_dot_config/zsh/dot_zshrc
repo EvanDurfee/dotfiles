@@ -110,6 +110,15 @@ autoload -U colors && colors
 eval "$(dircolors -b "$XDG_CONFIG_HOME/dircolors/colors.conf")"
 
 ################################################################################
+# Homebrew
+################################################################################
+
+# If homebrew isn't already loaded, load it now
+if [ -z "$HOMEBREW_PREFIX" ] && [ -e /home/linuxbrew/.linuxbrew/bin/brew ]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
+################################################################################
 # Plugins
 ################################################################################
 ezplug () {
