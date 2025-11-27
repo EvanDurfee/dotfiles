@@ -2,11 +2,11 @@
 
 variant="$1"
 
-prog_name="exa"
+prog_name="eza"
 config_dir="${XDG_CONFIG_HOME:-$HOME/.config}"/${prog_name}
-light_theme="$config_dir"/colors-light.config
-dark_theme="$config_dir"/colors-dark.config
-system_theme="$config_dir"/colors.config
+light_theme="$config_dir"/light-theme.yml
+dark_theme="$config_dir"/dark-theme.yml
+system_theme="$config_dir"/theme.yml
 mkdir -p "$config_dir"
 
 if [ "$variant" = "--init" ]; then
@@ -24,6 +24,4 @@ case "$variant" in
 esac
 
 printf "Setting $prog_name color scheme to %s\n" "$(basename "$target_theme")" >&2
-# rm -f "$system_theme"
 ln -rfs "$target_theme" "$system_theme"
-rm -f "${XDG_CACHE_HOME:-$HOME/.cache}"/exa/colors

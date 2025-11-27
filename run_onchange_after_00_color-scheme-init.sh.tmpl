@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -euo pipefail
+
+{{ range (glob (joinPath .chezmoi.sourceDir "udev")) -}}
+{{ if eq (stat .).type "file" -}}
+    # {{ . }} hash: {{ includeTemplate . | sha256sum }}
+{{ end -}}
+{{ end }}
+
+# Initialize freedesktop-color-scheme-monitor symlinks
+cat <<'EOF'
+===================================================
+Initialize color-scheme symlinks to dark mode
+===================================================
+EOF
+
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
+
+while IFS= read -r f; do
+	# rule="$(basename "$f")"
+	# echo "Installing udev rule $rule"
+	bash "$f" --init
+done < <(find {{ joinPath .chezmoi.sourceDir "dot_local/share/color-scheme/scripts/" | quote }} -mindepth 1 -maxdepth 1 -name "*.sh" -type f)
