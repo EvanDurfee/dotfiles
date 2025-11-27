@@ -67,6 +67,10 @@ if hash eza 2>/dev/null; then
 	alias ls='exa'
 fi
 
+# Ignore certail dirs by default
+alias rg='rg -g "!{/proc,/sys,**/.git,/sysroot,/ostree}"'
+alias fd='fd --exclude /proc --exclude /sys'
+
 # Shorter open
 alias open='xdg-open'
 
