@@ -246,13 +246,13 @@ fi
 # Completions
 ################################################################################
 zstyle ':completion:*' completer _complete                      # Basic completions; _approximate can be unpredictable
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{A-Z}={a-z}'  # Case insensitive tab completion
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
 zstyle ':completion:*' rehash true                              # automatically find new executables in path
 zstyle ':completion:*' squeeze-slashes true                     # Treat // as / in file paths instead of /*/
-# Speed up completions
 zstyle ':completion:*' accept-exact '*(N)'                      # Auto-accept if there is only one option
 zstyle ':completion:*' menu select                              # enable menu style completions
+# Speed up completions
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-"$HOME"/.cache}"/zsh/zcompcache
 # Display groups
@@ -267,8 +267,16 @@ zstyle ':completion:*' sort false                           # Disable fzf comple
 zstyle ':completion:*:descriptions' format '[%d]'           # Set description format to enable fzf-tab group support (auto-colored)
 zstyle ':completion:*' menu no                              # Menu style is incompatible with fzf-tab :(
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'  # Preview directory completions
-# Weird issue where the header obscures the first choice; disabled
-# zstyle ':fzf-tab:*' fzf-flags --color header:italic --header 'CTRL-SPACE to select multiple'
+# --header breaks the tab completion and cannot be used
+# case insensitive matching
+# ctrl-space: select multiple
+# ctrl-k: print query string instead of using a suggestion
+# enter: print query string if no suggestions, else print chosen suggestion(s)
+zstyle ':fzf-tab:*' fzf-flags \
+	-i \
+	--bind 'ctrl-k:print-query+abort' \
+	--bind 'enter:accept-or-print-query'
+
 # Add custom fzf flags
 zstyle ':fzf-tab:*' switch-group '<' '>'                    # Set keys to switch between completion groups
 
