@@ -1,84 +1,9 @@
-#!/bin/sh
-
-# This represents a universal config file for environment setup and preferences.
-# Load this with a login shell.
-# To override, create an overrides file which will be sourced at the end.
-
-# Source this file
-# ln -s ~/.config/profile/common ~/.profile
-# OR
-# ~/.profile: [ -e "~/.config/profile/common" ] && . "~/.config/profile/common"
-# "$ZDOTDIR"/.zprofile: [ -e ~/.profile ] && emulate sh -c 'source ~/.profile'
-
-# add .local/bin to path
-export PATH="$HOME/.local/bin:$PATH"
-# add local golang to path, if present
-export PATH="/usr/local/lib/go/bin:/usr/local/go/bin:$PATH"
-
-## Locale
-export LANG=en_US.utf8
-export LANGUAGE="en_US:en:C"
-# In theory, list prefered languages in order
-# For whatever reason, Fedora at least will grab swedish for application and categroty names (but not message text) if sv[_SE] appears anywhere in the list
-# export LANGUAGE="en_US:en:C:sv_SE:sv"
-export LC_ADDRESS=sv_SE.UTF-8
-#export LC_ADDRESS=en_US.UTF-8
-export LC_COLLATE=C.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LC_IDENTIFICATION=sv_SE.UTF-8
-#export LC_IDENTIFICATION=en_US.UTF-8
-export LC_MEASUREMENT=sv_SE.UTF-8
-#export LC_MEASUREMENT=en_US.UTF-8
-export LC_MESSAGES=en_US.UTF-8
-export LC_MONETARY=en_US.UTF-8
-export LC_NAME=en_US.UTF-8
-export LC_NUMERIC=en_US.UTF-8
-export LC_PAPER=sv_SE.UTF-8
-#export LC_PAPER=en_US.UTF-8
-export LC_TELEPHONE=sv_SE.UTF-8
-#export LC_TELEPHONE=en_US.UTF-8
-export LC_TIME=C.UTF-8
-
-## Application defaults
-export EDITOR="nano"
-export BROWSER="firefox"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# Add inherent scroll support to less / bat as desired
-# Means less will handle scrolling instead of the terminal emulator, which is
-#  required for scrolling in tmux to work (only works for graphical sessions).
-# However, if less takes control of the cursor, it is no longer possible to
-#  highlight and copy text from the terminal emulator.
-export LESS="-RF"
-if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
-#	export LESS="-RF --mouse --wheel-lines=5"
-	export BAT_PAGER="less -RF --mouse --wheel-lines=5"
-	export DELTA_PAGER="$BAT_PAGER"
-fi
-
-## Application configs
-
-# Exa
-# Make the detailed view less of a rainbow
-if [ -e "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf ]; then
-	# Combine non-commented lines
-	export EXA_COLORS="$(grep --extended-regexp --only-matching "^[^# $(printf '\t')]+" "${XDG_CONFIG_HOME:-$HOME/.config}"/exa/colors.cnf | tr '\n' ':')"
-fi
-export EXA_STRICT=true
-export TIME_STYLE="long-iso"
-# For more Exa features, see: https://the.exa.website/features.
-# You can also study my Dotfiles project: https://www.alchemists.io/projects/dotfiles.
-# ☿ 🜔 🜍 🜂 🜃 🜁 🜄
-
-# Initialize color-scheme files
-find "${XDG_DATA_HOME:-"$HOME"/.config}/color-scheme/scripts" -maxdepth 1 -type f -exec sh -c '
-		if ! "$1" --init >/dev/null 2>&1; then echo "Failed to run $1 --init"; fi
-	' sh {} \;
-
-## ~/ cleanup (may need to create these folders / files manually)
+# Try to make programs follow the XDF directory spec
 # Check here for updates: https://wiki.archlinux.org/index.php/XDG_Base_Directory
 
 # anaconda (python)
@@ -99,6 +24,9 @@ export ATOM_HOME="$XDG_DATA_HOME"/atom
 # AWS cli
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+
+# Azure cli
+export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
 
 # Bash Completion
 export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash-completion/bash_completion
@@ -157,7 +85,8 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 # KDE
-export KDEHOME="$XDG_CONFIG_HOME"/kde
+# Broken support post-kde 4
+# export KDEHOME="$XDG_CONFIG_HOME"/kde
 
 # Kodi
 export KODI_DATA="$XDG_DATA_HOME/kodi"
@@ -207,6 +136,12 @@ export RUSTROVER_PROPERTIES="${XDG_CONFIG_HOME:-"$HOME"/.config}"/JetBrains/idea
 # 	}
 # }
 
+# Minio Client
+export MC_CONFIG_DIR="$XDG_CONFIG_HOME"/minio-client
+
+# MyPy
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
+
 # NodeJS
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 
@@ -224,10 +159,13 @@ export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 # NVM
 export NVM_DIR="$XDG_DATA_HOME"/nvm
 
+# parallel
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+
 # pass
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 
-# PSQL
+# PostgresQL
 mkdir -p "$XDG_CONFIG_HOME/pg"
 mkdir -p "$XDG_CACHE_HOME/pg"
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
@@ -235,12 +173,30 @@ export PSQL_HISTORY="$XDG_CACHE_HOME/pg/psql_history"
 export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 
+# PyEnv
+export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
+
 # Python
-export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
+export PYTHON_HISTORY="$XDG_STATE_HOME"/python_history
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
+export PYTHONUSERBASE="$XDG_DATA_HOME"/python
+mkdir -p "$PYTHONPYCACHEPREFIX" "$PYTHONUSERBASE"
+
+# Python pylint
 export PYLINTHOME="$XDG_CACHE_HOME"/pylint
+
+# Python setuptools
+export PYTHON_EGG_CACHE="$XDG_CACHE_HOME"/python-eggs
 
 # GNU Readline
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
+
+# Redis
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+export REDISCLI_HISTFILE="$XDG_STATE_HOME"/redis/rediscli_history
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/config
 
 # Ruby Gems
 # Auto-generates a gemrc to set the bin dir to $XDG_DATA_HOME/gem/bin
@@ -259,17 +215,13 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 # SBT
 # more work than it's worth to fix, due to dependent tools
 
+# GNU Screen
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export SCREENDIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"/screen
+
 # Teamspeak
 # Disabled to avoid breaking flatpak installations
 # export TS3_CONFIG_DIR="$XDG_CONFIG_HOME/ts3client"
-
-# Tmux Smart Session Manager
-if [ -d "$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin" ]; then
-	export PATH="$PATH:$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin"
-fi
-
-# GNU Screen
-export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 
 # vale
 #if which vale >/dev/null 2>&1; then
@@ -289,14 +241,6 @@ export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 mkdir -p "$XDG_DATA_HOME"/wineprefixes
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 
-# ZOXIDE
-export _ZO_DATA_DIR="$XDG_CACHE_HOME"/zoxide
-
 # ZSH
 # Should be done in ~/.zshenv instead, since it is first in the load order
 # export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-
-## Overrides
-[ -e "$XDG_CONFIG_HOME/profile/override" ] && . "$XDG_CONFIG_HOME/profile/override"
-
-export DOTFILES_PROFILE_LOADED=true

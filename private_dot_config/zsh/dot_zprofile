@@ -1,1 +1,28 @@
-[ -e ~/.config/profile/common ] && emulate sh -c 'source ~/.config/profile/common'
+# Add to path only if not already present
+pathmunge()
+{
+    if ! echo $PATH | /bin/grep -qE "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH=$PATH:$1
+        else
+            PATH=$1:$PATH
+        fi
+    fi
+}
+
+# Source ~/.config/profile.d/*.sh with ksh emulation
+_src_xdg_profile_d()
+{
+	# ksh parsing is similar to bash
+    emulate -L ksh
+
+    for i in "$HOME"/.config/profile.d/*.sh; do
+	    if [ -r "$i" ]; then
+	        . $i
+	    fi
+    done
+    unset i
+}
+_src_xdg_profile_d
+
+unset -f pathmunge _src_xdg_profile_d

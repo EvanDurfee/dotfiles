@@ -1,9 +1,28 @@
-# Load the common profile
-if [[ -e ~/.config/profile/common ]]; then
-  . ~/.config/profile/common
-fi
+# prepend (or append) a dir to path
+pathmunge () {
+	case ":${PATH}:" in
+		*:"$1":*)
+			;;
+		*)
+			if [ "$2" = "after" ] ; then
+				PATH=$PATH:$1
+			else
+				PATH=$1:$PATH
+			fi
+	esac
+}
+
+# Load all common profile.sh files
+for i in "$HOME"/.config/profile.d/*.sh; do
+	if [ -r "$i" ]; then
+		echo "Loading $i"
+		. "$i"
+	fi
+done
+unset i
+unset -f pathmunge
 
 # If the shell is interactive and bashrc exists, load it
 if [[ $- == *i* && -f ~/.bashrc ]]; then
-    . ~/.bashrc
+	. ~/.bashrc
 fi

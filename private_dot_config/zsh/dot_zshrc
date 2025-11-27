@@ -215,8 +215,7 @@ autoload -Uz $fpath[1]/*(.:t)
 # Add ubuntu completions path
 # docker is hardcoded to use this even on fedora
 if [ -d /usr/share/zsh/vendor-completions ]; then
-	fpath+=()
-	fpath=( "${fpath[@]}" /usr/share/zsh/vendor-completions )
+	fpath=("${fpath[@]}" /usr/share/zsh/vendor-completions)
 fi
 
 # Load completions if installed
@@ -309,6 +308,25 @@ if test -n "$KITTY_INSTALLATION_DIR"; then
     autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
     kitty-integration
     unfunction kitty-integration
+fi
+
+# Tmux stuff
+if [ -n "$TMUX" ]; then
+	# Tmux Smart Session Manager
+	if [ -d "$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin" ]; then
+		export PATH="$PATH:$XDG_DATA_HOME/tmux-plugins/t-smart-tmux-session-manager/bin"
+	fi
+
+	# Add inherent scroll support to less / bat as desired
+	# Means less will handle scrolling instead of the terminal emulator, which is
+	#  required for scrolling in tmux to work (only works for graphical sessions).
+	# However, if less takes control of the cursor, it is no longer possible to
+	#  highlight and copy text from the terminal emulator.
+	if [ "$(less --version | head --lines=1 | grep --only-matching -E "[0-9]+")" -ge 549 ]; then
+	#    export LESS="-RF --mouse --wheel-lines=5"
+		export BAT_PAGER="less -RF --mouse --wheel-lines=5"
+		export DELTA_PAGER="$BAT_PAGER"
+	fi
 fi
 
 # Dump profiling results if enabled
