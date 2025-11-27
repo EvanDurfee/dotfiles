@@ -10,7 +10,7 @@ Initialize .ssh/config
 EOF
 
 # Ensure profile is configured when running on a fresh system
-if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . "${XDG_CONFIG_HOME:-"$HOME"/.config}"/profile/common; fi
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
 
 if [ -e "$HOME"/.ssh/config ]; then
 	exit 0
