@@ -4,25 +4,40 @@
 
 set -euo pipefail
 
+# Run `ddcutil capabilities` to see all supported properties
+
 # Get current input
-current="$(ddcutil getvcp 60 | sed -n "s/.*(sl=\(.*\))/\1/p")"
+# disabled - pretty slow on the laptop
+# current="$(ddcutil getvcp 60 | sed -n "s/.*(sl=\(.*\))/\1/p")"
+
+# See https://www.dmtf.org/standards/SMBIOS
+chassis="$(cat /sys/class/dmi/id/chassis_type)"
+case "$chassis" in
+	# Probably a desktop
+	3 | 4 | 5 | 6 | 7 | 35)
+		current='desktop'
+		;;
+	*)
+		current='laptop'
+		;;
+esac
 
 # Get the other input
-case $current in
+case "$current" in
 
     # Usb
-    0x1b)
+    laptop | 0x19)
         output=0x0f
         ;;
 
     # Display port
-    0x0f)
-        output=0x1b
+    desktop | 0x0f)
+        output=0x19
         ;;
 
     # HDMI
     0x11)
-        output=0x1b
+        output=0x19
         ;;
 
     *)
@@ -32,4 +47,4 @@ case $current in
 esac
 
 # Set new input
-ddcutil setvcp 60 $output
+ddcutil setvcp 60 "$output"

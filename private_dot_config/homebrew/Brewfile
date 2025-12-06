@@ -37,7 +37,8 @@ brew "imagemagick"
 brew "dfu-util"
 
 # KVM management
-brew "ddcutil"
+# Requires tight hardware integration; use system package
+# brew "ddcutil"
 
 # Desktop Utils
 # restart_service: true will also start the service on fresh install :)
