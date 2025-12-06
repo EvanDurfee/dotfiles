@@ -70,3 +70,7 @@ alias cfg='chezmoi'
 alias k='kubectl'
 alias d='docker'
 alias h='helm'
+
+alias dellman-thunderbolt='ddcutil setvcp 60 0x1b'
+alias dellman-dp='ddcutil setvcp 60 0x0f'
+alias dellman-hdmi='ddcutil setvcp 60 0x11'
