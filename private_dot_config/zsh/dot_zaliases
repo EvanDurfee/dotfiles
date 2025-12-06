@@ -41,7 +41,7 @@ alias cp='cp --reflink=auto'
 # alias sudo='sudo '
 
 # Eza aliases
-alias eza='LS_COLORS= eza --smart-groups --header'
+alias eza='LS_COLORS= eza --smart-group --header'
 alias x='eza --all --long --header --group --group-directories-first'
 alias xt='x --tree'
 # Questionable alias! If this breaks things in practice, maybe revert
