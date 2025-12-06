@@ -36,6 +36,9 @@ brew "imagemagick"
 # Keyboard firmware flashing
 brew "dfu-util"
 
+# KVM management
+brew "ddcutil"
+
 # Desktop Utils
 # restart_service: true will also start the service on fresh install :)
 brew "evandurfee/tap/freedesktop-color-scheme-monitor", restart_service: true
