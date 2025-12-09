@@ -29,6 +29,9 @@ brew "tmux"
 brew "yq"
 brew "zoxide"
 
+# DNS utils
+brew "bind"  # Gets us an up-to-date version of dig
+
 # Image manipulation
 brew "libheif"
 brew "imagemagick"
