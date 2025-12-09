@@ -309,7 +309,7 @@ if [ -f "${ZDOTDIR:-$HOME}/.zoverride" ]; then
 fi
 
 ## Set terminal window and tab/icon title + pwd
-source "${ZDOTDIR:-$HOME}/set_term_info.zsh"
+# source "${ZDOTDIR:-$HOME}/set_term_info.zsh"
 
 # Add named directory zsh
 hash -d zsh="$ZDOTDIR"
