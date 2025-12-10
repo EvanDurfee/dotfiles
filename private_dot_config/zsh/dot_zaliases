@@ -74,3 +74,6 @@ alias h='helm'
 alias dellman-thunderbolt='ddcutil setvcp 60 0x1b'
 alias dellman-dp='ddcutil setvcp 60 0x0f'
 alias dellman-hdmi='ddcutil setvcp 60 0x11'
+
+alias blind-ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias blind-scp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'

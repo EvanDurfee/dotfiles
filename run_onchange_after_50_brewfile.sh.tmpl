@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # hash: {{ include "private_dot_config/homebrew/Brewfile" | sha256sum }}
 cat <<'EOF'
 ===================================================
