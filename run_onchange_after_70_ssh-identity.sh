@@ -13,6 +13,11 @@ EOF
 if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
 
 
+bw() {
+	flatpak run --command=bw com.bitwarden.desktop "$@"
+}
+
+
 echo "Check for BW session"
 did_unlock=false
 if [ -z "${BW_SESSION:-}" ]; then
@@ -21,11 +26,6 @@ if [ -z "${BW_SESSION:-}" ]; then
 	export BW_SESSION="$(bw unlock --raw)"
 	did_unlock=true
 fi
-
-
-bw() {
-	flatpak run --command=bw com.bitwarden.desktop "$@"
-}
 
 
 key_id='SSH Identity Key'
