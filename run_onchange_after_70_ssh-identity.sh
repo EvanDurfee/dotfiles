@@ -44,10 +44,10 @@ fi
 if ! [ -e "$HOME/.ssh/identity-cert.pub" ]; then
 	attachment_id="$(bw get item 'SSH Identity Key' | jq '.attachments[] | select(.fileName == "identity-cert.pub") | .id' --raw-output)"
 
-	if [ -z "${attachment_id:-}" ]; then break; fi
-
-	echo "Fetching SSH identity cert"
-	bw get attachment "$attachment_id" --itemid "$(bw get item 'SSH Identity Key' | jq .id --raw-output)" --output ~/.ssh/identity-cert.pub
+	if [ -n "${attachment_id:-}" ]; then
+		echo "Fetching SSH identity cert"
+		bw get attachment "$attachment_id" --itemid "$(bw get item 'SSH Identity Key' | jq .id --raw-output)" --output ~/.ssh/identity-cert.pub
+	fi
 else
 	echo "~/.ssh/identity-cert.pub exists, skipping"
 fi
