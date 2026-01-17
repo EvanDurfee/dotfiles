@@ -149,11 +149,31 @@ ezplug () {
 			git -C "$plugin_dir" pull >/dev/null && touch "$state_dir"/"$plugin_name_hash"
 		fi
 	fi
+
+	local plugin_loaded=false
 	if [ -e "$plugin_dir"/"${1:t}.plugin.zsh" ]; then
-		source "$plugin_dir"/"${1:t}.plugin.zsh"
+		source "$plugin_dir"/"${1:t}.plugin.zsh" && plugin_loaded=true
 	fi
 	if [ -e "$plugin_dir"/"${1:t}.zsh-theme" ]; then
-		source "$plugin_dir"/"${1:t}.zsh-theme"
+		source "$plugin_dir"/"${1:t}.zsh-theme" && plugin_loaded=true
+	fi
+
+	if ! "$plugin_loaded"; then
+		[ -n "${IFS+set}" ] && local saved_IFS="$IFS"
+
+		for f in $(find "$plugin_dir" -maxdepth 1 -type f -regextype posix-egrep -regex '.*\.(plugin\.zsh|zsh-theme)' -print0); do
+			if [ -n "$f" ]; then
+				source "$f"
+				plugin_loaded=true
+			fi
+		done
+
+		unset IFS
+		[ -n "${saved_IFS+set}" ] && { IFS="$saved_IFS"; unset saved_IFS; }
+	fi
+
+	if ! "$plugin_loaded"; then
+		echo "No plugin.zsh or zsh-theme found for plugin $1" >&2
 	fi
 }
 
