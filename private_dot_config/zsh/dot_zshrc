@@ -235,27 +235,41 @@ export FZF_CTRL_R_OPTS="\
 
 
 ################################################################################
+# Mise Integration
+################################################################################
+if whence -w mise >/dev/null; then
+	source <(mise activate zsh)
+fi
+
+
+################################################################################
 # Other fpath and shell integrations
 ################################################################################
 # Add functions dir to fpath and load them
 fpath=("${ZDOTDIR:-$HOME}/functions" "${fpath[@]}")
 autoload -Uz $fpath[1]/*(.:t)
 
-# Add ubuntu completions path
-# docker is hardcoded to use this even on fedora
-if [ -d /usr/share/zsh/vendor-completions ]; then
-	fpath=("${fpath[@]}" /usr/share/zsh/vendor-completions)
-fi
+# Add ubuntu completions path and a local site-functions dir
+# docker is hardcoded to use ubuntu's vendor dir even on fedora
+__extra_fpaths=(
+	/usr/share/zsh/vendor-completions
+	/usr/share/zsh/vendor-functions
+	/usr/share/zsh/site-completions
+	/usr/share/zsh/site-functions
+	"$XDG_DATA_HOME"/zsh/site-completions
+	"$XDG_DATA_HOME"/zsh/site-functions
+)
+
+for p in "${__extra_fpaths[@]}"; do
+	if [[ ${fpath[(ie)$p]} -gt ${#fpath} ]]; then
+		fpath+=("$p")
+	fi
+done
+unset __extra_fpaths
 
 # Load completions if installed
 if flatpak info com.bitwarden.desktop >/dev/null 2>&1; then
 	source <(flatpak run --command=bw com.bitwarden.desktop completion --shell zsh)
-fi
-if hash kubectl 2>/dev/null; then
-	source <(kubectl completion zsh)
-fi
-if hash helm 2>/dev/null; then
-	source <(helm completion zsh)
 fi
 if hash rustup 2>/dev/null; then
 	source <(rustup completions zsh)
@@ -302,6 +316,16 @@ zstyle ':fzf-tab:*' switch-group '<' '>'                    # Set keys to switch
 
 # Load the completion system
 autoload -Uz compinit && compinit
+_comp_options+=(globdots)                                   # Always include hidden files in tab completion
+
+# Load completions that depend on compdef (if not already defined)
+if ! whence -w _kubectl >/dev/null && hash kubectl 2>/dev/null; then
+	source <(kubectl completion zsh)
+fi
+if ! whence -w _helm >/dev/null && hash helm 2>/dev/null; then
+	source <(helm completion zsh)
+fi
+
 
 ################################################################################
 # Zoxide
