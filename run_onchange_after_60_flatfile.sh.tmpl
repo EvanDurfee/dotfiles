@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# hash: {{ include "private_dot_config/flatpak-sync/config.yaml" | sha256sum }}
+# hash: {{ joinPath .chezmoi.destDir ".config/flatpak-sync/config.yaml" | include | sha256sum }}
 cat <<'EOF'
 ===================================================
 Install Flatpaks
@@ -12,7 +12,7 @@ EOF
 # Ensure profile is configured when running on a fresh system
 if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
 
-flatpak-installation-sync install --file={{ joinPath .chezmoi.sourceDir "private_dot_config/flatpak-sync/config.yaml" | quote }}
+flatpak-installation-sync install --file={{ joinPath .chezmoi.destDir ".config/flatpak-sync/config.yaml" | quote }}
 
 # Signal password store
 flatpak override --user --env=SIGNAL_PASSWORD_STORE=gnome-libsecret org.signal.Signal

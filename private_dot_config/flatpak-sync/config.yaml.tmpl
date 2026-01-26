@@ -14,8 +14,6 @@
   install:
     - org.gtk.Gtk3theme.adw-gtk3
     - org.gtk.Gtk3theme.adw-gtk3-dark
-    - dev.qwery.AddWater
-    - io.github.Foldex.AdwSteamGtk
       # Gnome Standard Utils
     - org.gnome.Calculator
     - org.gnome.Calendar
@@ -45,23 +43,40 @@
     - com.usebottles.bottles
       # Office stuff
 #    - org.libreoffice.LibreOffice
-    - org.onlyoffice.desktopeditors
+#    - org.onlyoffice.desktopeditors
+    - com.collaboraoffice.Office
       # Image Editing
     - org.gimp.GIMP
     - com.github.PintaProject.Pinta
       # Video
     - com.github.rafostar.Clapper
     - com.github.rafostar.Clapper.Enhancers
+{{- if eq .profile "home" }}
+      # Browser
+    - org.mozilla.firefox
+    - org.mozilla.Thunderbird
+    - dev.qwery.AddWater
+      # Video
+    - com.github.iwalton3.jellyfin-media-player
+    - com.makemkv.MakeMKV
+    - net.mediaarea.MediaInfo
+    - org.bunkus.mkvtoolnix-gui
+    - org.kde.subtitlecomposer
       # Gaming
     - com.valvesoftware.Steam
+    - io.github.Foldex.AdwSteamGtk
     - com.heroicgameslauncher.hgl
     - com.vysp3r.ProtonPlus
     - com.github.Matoking.protontricks
       # Chat
     - com.discordapp.Discord
     - org.signal.Signal
+    - com.teamspeak.TeamSpeak
       # Books
     - com.calibre_ebook.calibre
+      # Music
+    - com.spotify.Client
+{{- end }}
       # Dev Tools
     - de.leopoldluley.Clapgrep
     - io.gitlab.adhami3310.Impression
@@ -76,3 +91,5 @@
     - com.ranfdev.DistroShelf  # Use CLI tools instead?
     - io.github.flattool.Ignition  # use gnome tweaks for startup apps
     - io.github.getnf.embellish  # Use brew for fonts
+#    - org.onlyoffice.desktopeditors
+#    - org.libreoffice.LibreOffice
