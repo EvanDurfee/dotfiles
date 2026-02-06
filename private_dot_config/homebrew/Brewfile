@@ -29,6 +29,10 @@ brew "tmux"
 brew "yq"
 brew "zoxide"
 
+brew "mise"
+brew "sshpass"
+brew "dust"
+
 # DNS utils
 brew "bind"  # Gets us an up-to-date version of dig
 
@@ -51,14 +55,12 @@ brew "syncthing", restart_service: true
 # brew "bitwarden-cli" # Use the flatpak
 
 # IDEs
-cask "evandurfee/tap/clion-linux"
-cask "evandurfee/tap/datagrip-linux"
-cask "evandurfee/tap/goland-linux"
-cask "evandurfee/tap/intellij-idea-linux"
-cask "evandurfee/tap/pycharm-linux"
-cask "evandurfee/tap/rider-linux"
-cask "evandurfee/tap/rubymine-linux"
-cask "evandurfee/tap/rustrover-linux"
-cask "evandurfee/tap/vscodium-linux"
-# brew "mise"
-# brew "uv"
+#cask "evandurfee/tap/clion-linux"
+#cask "evandurfee/tap/datagrip-linux"
+#cask "evandurfee/tap/goland-linux"
+#cask "evandurfee/tap/intellij-idea-linux"
+#cask "evandurfee/tap/pycharm-linux"
+#cask "evandurfee/tap/rider-linux"
+#cask "evandurfee/tap/rubymine-linux"
+#cask "evandurfee/tap/rustrover-linux"
+#cask "evandurfee/tap/vscodium-linux"
