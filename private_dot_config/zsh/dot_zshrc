@@ -61,7 +61,17 @@ DIRSTACKSIZE=20
 ################################################################################
 # Keybindings
 ################################################################################
-bindkey -e
+bindkey -e                                                      # Use emacs mode (-v for VI mode)
+
+# In emacs mode, esc (aka ^[) acts as the prefix key for line editor commands
+# e.g. hitting ESC then typing "a" is bound to accept-and-hold.
+# This section rebinds esc to do nothing, as I prefer to use key combos instead
+# of prefix sequences and have esc return me to the current line.
+function .do-nothing() {}                                       # Disable prefix key
+zle -N .do-nothing
+bindkey '^[' .do-nothing
+KEYTIMEOUT=1
+
 bindkey '^[[7~' beginning-of-line                               # Home key
 bindkey '^[[H' beginning-of-line                                # Home key
 if [[ "${terminfo[khome]}" != "" ]]; then
