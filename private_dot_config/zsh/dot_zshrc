@@ -237,6 +237,7 @@ export FZF_CTRL_R_OPTS="\
   --preview-window up:wrap:3
   --bind 'ctrl-/:toggle-preview'
   --bind 'ctrl-k:print-query+abort'
+  --bind 'alt-enter:print-query+abort'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | clip)+abort'
   --bind 'enter:accept-or-print-query'
   --bind 'esc:abort'
@@ -319,6 +320,7 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'  #
 zstyle ':fzf-tab:*' fzf-flags \
 	-i \
 	--bind 'ctrl-k:print-query+abort' \
+	--bind 'alt-enter:print-query+abort' \
 	--bind 'enter:accept-or-print-query'
 
 # Add custom fzf flags
