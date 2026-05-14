@@ -1,5 +1,6 @@
 [calendar]
 show-weekdate=true
+week-start-day='monday'
 
 [datetime]
 automatic-timezone=false
