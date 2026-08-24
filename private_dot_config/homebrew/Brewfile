@@ -1,4 +1,4 @@
-tap "evandurfee/tap"
+tap "evandurfee/tap", trusted: true
 
 # Mono Fonts
 cask "font-fira-code-nerd-font"
