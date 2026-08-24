@@ -32,6 +32,7 @@ brew "zoxide"
 brew "mise"
 brew "sshpass"
 brew "dust"
+brew "uv"
 
 # DNS utils
 brew "bind"  # Gets us an up-to-date version of dig
