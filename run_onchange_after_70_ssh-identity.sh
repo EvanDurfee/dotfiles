@@ -63,12 +63,3 @@ if $did_unlock; then
 	bw lock
 	unset BW_SESSION
 fi
-
-if ! grep --quiet 'IdentityFile' ~/.ssh/config; then
-	echo "Adding identity template to ssh config"
-	cat <<'EOF' | tee -a "$HOME"/.ssh/config >/dev/null
-Host *
-	IdentityFile ~/.ssh/identity.pub
-#	CertificateFile ~/.ssh/identity-cert.pub
-EOF
-fi

@@ -4,3 +4,10 @@ dconf
 udev
 home.txt.age
 work.txt.age
+
+# Don't include target files if not matching profile
+{{- if ne .profile "home" }}
+.ssh/config.d/40_homelab_proxmox
+.ssh/config.d/41_homelab_services
+{{- else if ne .profile "work" }}
+{{- end }}

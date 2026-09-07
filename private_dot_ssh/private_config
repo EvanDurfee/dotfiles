@@ -1,0 +1,13 @@
+# SSH prioritizes top to bottom.
+# Aliases should come first, followed by host-specifc configs
+# Defaults should come last
+
+# Prioritize any overrides
+Include config.d/*
+
+# Defaults
+Host *
+	ServerAliveInterval 60
+	ServerAliveCountMax 240
+	IdentityFile ~/.ssh/identity.pub
+	CertificateFile ~/.ssh/identity-cert.pub
