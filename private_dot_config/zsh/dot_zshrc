@@ -370,11 +370,6 @@ fi
 # Add named directory zsh
 hash -d zsh="$ZDOTDIR"
 
-# Use Bitwarden SSH agent
-if [ -e "$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock ]; then
-	export SSH_AUTH_SOCK="$HOME"/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
-fi
-
 # If running kitty terminal, add integration
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="no-cursor"
