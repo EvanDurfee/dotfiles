@@ -4,10 +4,18 @@
 {{- $gitSigningFormat := promptStringOnce . "gitSigningFormat" "Git signing format (openpgp or ssh)" -}}
 {{- $gitSigningKey := promptStringOnce . "gitSigningKey" "Git signing key" -}}
 
+encryption = "age"
+[age]
+	identity = "~/.config/chezmoi/key.txt"
+{{- if eq $profile "home" }}
+	recipient = "age1rv27u8kv2l8wmdjaumgmh0agwsrm8xkwrlh9eghjwa2sjv8wgdxqaxd7x6"
+{{- else if eq $profile "work" }}
+	recipient = "age14alaylu6x6tcsykg7xmnphxw8pdtdnek8ekgkgrxn7n2up2vhqqqwalp9l"
+{{- end }}
+
 [data]
 	profile = {{ $profile | quote }}
 	name = {{ $name | quote }}
 	email = {{ $email | quote }}
 	gitSigningFormat = {{ $gitSigningFormat | quote }}
 	gitSigningKey = {{ $gitSigningKey | quote }}
-

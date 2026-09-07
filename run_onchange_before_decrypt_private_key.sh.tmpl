@@ -1,0 +1,18 @@
+#!/bin/sh
+
+set -euo pipefail
+
+{{- if eq .profile "home" }}
+source_key="{{ .chezmoi.sourceDir }}/home.txt.age"
+{{- else if eq .profile "work" }}
+source_key="{{ .chezmoi.sourceDir }}/work.txt.age"
+{{- else }}
+echo "Unsupported profile" >&2
+exit 1
+{{- end }}
+
+if [ ! -f "${HOME}/.config/chezmoi/key.txt" ]; then
+    mkdir -m 700 -p "${HOME}"/.config/chezmoi
+    (umask 177 && touch "${HOME}"/.config/chezmoi/key.txt)
+    chezmoi age decrypt --output "${HOME}/.config/chezmoi/key.txt" --passphrase "${source_key}"
+fi

@@ -6,7 +6,14 @@ Migration from git bare repo is in progress
 
 ## Setup
 
-Install homebrew and chezmoi first
+### Pre-reqs
+
+Linux system with homebrew and chezmoi installed.
+
+### Config init
+
+Initialize the chezmoi config.
+Separate home and work profiles are supported, with different age encryption keys.
 
 ```shell
 chezmoi init --ssh --branch=chezmoi evandurfee
