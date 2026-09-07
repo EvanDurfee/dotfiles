@@ -32,26 +32,29 @@ key_id='SSH Identity Key'
 mkdir -p "$HOME"/.ssh
 touch "$HOME"/.ssh/known_hosts
 
+echo "Checking for SSH public key"
 if ! [ -e "$HOME/.ssh/identity.pub" ]; then
 	echo "Fetching SSH identity public key"
-	bw get item "$key_id" | jq '.sshKey.publicKey' --raw-output > ~/.ssh/identity.pub
-	chmod 600 ~/.ssh/identity.pub
+	tmpfile="$(umask 177; mktemp)"
+	bw get item "$key_id" | jq '.sshKey.publicKey' --raw-output > "$tmpfile" && mv "$tmpfile" ~/.ssh/identity.pub
 else
 	echo "~/.ssh/identity.pub exists, skipping"
 fi
 
 
+echo "Checking for SSH public key cert"
 if ! [ -e "$HOME/.ssh/identity-cert.pub" ]; then
 	attachment_id="$(bw get item 'SSH Identity Key' | jq '.attachments[] | select(.fileName == "identity-cert.pub") | .id' --raw-output)"
 
 	if [ -n "${attachment_id:-}" ]; then
 		echo "Fetching SSH identity cert"
-		bw get attachment "$attachment_id" --itemid "$(bw get item 'SSH Identity Key' | jq .id --raw-output)" --output ~/.ssh/identity-cert.pub
+		(umask 177; bw get attachment "$attachment_id" --itemid "$(bw get item 'SSH Identity Key' | jq .id --raw-output)" --output ~/.ssh/identity-cert.pub)
 	fi
 else
 	echo "~/.ssh/identity-cert.pub exists, skipping"
 fi
 
+echo "Checking for CA key"
 if bw get item 'SSH CA Key' >/dev/null && ! grep --quiet '@cert-authority' ~/.ssh/known_hosts; then
 	echo "Adding SSH CA to trusted authorities"
 	cat >> ~/.ssh/known_hosts <<< "@cert-authority * $(bw get item 'SSH CA Key' | jq .sshKey.publicKey --raw-output)"
