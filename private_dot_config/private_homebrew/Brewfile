@@ -12,6 +12,7 @@ cask "font-lexend"
 # CLI tools
 brew "evandurfee/tap/clip"
 
+brew "ansible"
 brew "bat"
 brew "chezmoi"
 brew "cosign"
