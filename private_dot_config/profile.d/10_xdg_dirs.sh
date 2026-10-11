@@ -199,15 +199,11 @@ export REDISCLI_HISTFILE="$XDG_STATE_HOME"/redis/rediscli_history
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/config
 
 # Ruby Gems
-# Auto-generates a gemrc to set the bin dir to $XDG_DATA_HOME/gem/bin
 # XDG_DATA_HOME must not contain spaces
 export GEMRC="$XDG_CONFIG_HOME"/gemrc
 export GEM_HOME="$XDG_DATA_HOME"/gem
 export PATH="$PATH:$GEM_HOME/bin"
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
-if ! [ -e "$XDG_CONFIG_HOME"/gemrc ]; then
-	echo "gem: --bindir $GEM_HOME/bin" > "$GEMRC"
-fi
 
 # Rust up
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
