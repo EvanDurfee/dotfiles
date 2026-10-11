@@ -11,7 +11,9 @@ cask "font-lexend"
 
 # CLI tools
 brew "evandurfee/tap/clip"
-brew "evandurfee/tap/git-wts"
+brew "evandurfee/tap/git-worktree-sync"
+brew "evandurfee/tap/git-amend"
+brew "evandurfee/tap/git-exclude"
 
 brew "ansible"
 brew "bat"
