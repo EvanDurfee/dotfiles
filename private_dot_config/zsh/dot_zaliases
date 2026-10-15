@@ -2,8 +2,40 @@
 
 # Bitwarden flatpak CLI
 if flatpak info com.bitwarden.desktop >/dev/null 2>&1; then
-	bw_shim() {
+	bw_raw() {
 		flatpak run --command=bw com.bitwarden.desktop "$@"
+	}
+	# Bug in bitwarden client blocks interaction when piping, e.g. BW_SESSION="$(bw unlock --raw)"
+	# Replace with "non-interactive" prompt
+	bw_unlock() {
+		local pw
+		printf 'Master password: ' >/dev/tty
+		read -rs pw </dev/tty
+		echo >/dev/tty
+		BW_MASTER="$pw" bw_raw unlock --raw --passwordenv BW_MASTER
+	}
+
+	bw_shim() {
+		local s
+		case "$1" in
+			lock)
+				unset BW_SESSION
+				bw_raw lock
+				return
+				;;
+			unlock)
+				s="$(bw_unlock)" && [[ -n $s ]] || return 1
+				export BW_SESSION="$s"
+				return
+				;;
+			esac
+
+		if [[ -z $BW_SESSION ]]; then
+			s="$(bw_unlock)" && [[ -n $s ]] || return 1
+			export BW_SESSION="$s"
+			(( ZSH_SUBSHELL )) && print -u2 "bw: unlocked inside a subshell/pipeline; run 'bw unlock' to keep the session"
+		fi
+		bw_raw --nointeraction "$@"
 	}
 	compdef _bw bw_shim
 	alias bw='bw_shim'
