@@ -12,6 +12,12 @@ EOF
 # Ensure profile is configured when running on a fresh system
 if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
 
+# Set flatpak locales; must include all user-configured locales
+languages="en;sv"
+if [ "$(flatpak config --get languages)" != "$languages" ]; then
+	flatpak config --set languages "$languages"
+fi
+
 flatpak-installation-sync install --file={{ joinPath .chezmoi.destDir ".config/flatpak-sync/config.yaml" | quote }}
 
 # Signal password store
