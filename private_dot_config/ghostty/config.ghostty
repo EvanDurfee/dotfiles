@@ -1,0 +1,20 @@
+theme = dark:Tomorrow Night,light:Tomorrow
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+background-opacity = 0.95
+# Support might be added now that gnome 51 is out, but not yet
+# background-blur = 20
+
+
+font-family = "Hack Nerd Font Mono"
+font-family = "MesloLGMDZ Nerd Font Mono"
+font-family = "FiraCode Nerd Font Mono"
+
+font-size = 14
+
+command = zsh
+
+# Map shift+enter to alt+enter (which can be mapped to newline in zsh and bash)
+keybind = shift+enter=text:\x1b\r
