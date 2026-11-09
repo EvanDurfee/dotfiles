@@ -129,6 +129,17 @@ shopt -s expand_aliases
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
+# Map alt+enter to newline
+bind '"\e\C-m": "\C-v\C-j"'
+
+# Show all matches on first tab
+#bind 'set show-all-if-ambiguous on'
+# Cycle matches on tab (like zsh menu)
+#bind 'TAB: menu-complete'
+#bind 'set menu-complete-display-wrap on'
+# Case-insensitive completion
+#bind 'set completion-ignore-case on'
+
 #
 # # ex - archive extractor
 # # usage: ex <file>
