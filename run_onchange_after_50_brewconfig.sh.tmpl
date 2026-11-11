@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Homebrew defaults to ~/.homebrew, and only uses XDG dirs if explicitly set
+# uupd unsets all env vars when running homebrew, so it never uses the XDG config
+# We set the homebrew config directory explicitly to point to the user's config
+# to allow automatic updates from custom trusted taps.
+
+cat <<'EOF'
+===================================================
+Set Homebrew Config Dir
+===================================================
+EOF
+
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
+
+# Make the homebrew config dir
+mkdir -p "$(brew --prefix)"/etc/homebrew/
+
+
+cat <<'EOF' | tee "$(brew --prefix)"/etc/homebrew/brew.env >/dev/null
+# Managed by Chezmoi, do not edit directly
+HOMEBREW_XDG_CONFIG_HOME={{ .chezmoi.destDir }}/.config
+EOF

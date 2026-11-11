@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -euo pipefail
+
+cat <<'EOF'
+===================================================
+Gaming flatpak configuration
+===================================================
+EOF
+
+# Ensure profile is configured when running on a fresh system
+if [ -z "${DOTFILES_PROFILE_LOADED:-}" ]; then . ~/.bash_profile; fi
+
+{{- if eq .profile "home" }}
+{{- $steam_runtime := output "sh" "-c" "flatpak info --show-runtime com.valvesoftware.Steam 2>/dev/null || true" | trim -}}
+
+{{ if not $steam_runtime -}}
+echo "mangohud: Steam flatpak not installed, skipping" >&2
+{{- else -}}
+{{- $parts := splitList "/" $steam_runtime }}
+# Install into the same scope as Steam
+if flatpak info --user com.valvesoftware.Steam >/dev/null 2>&1; then
+	scope=--user
+else
+	scope=--system
+fi
+
+flatpak install "$scope" --noninteractive --or-update flathub \
+	runtime/org.freedesktop.Platform.VulkanLayer.MangoHud/{{ index $parts 1 }}/{{ index $parts 2 }}
+{{- end }}
+
+
+# Steam enable mangohud and proton variables by default
+flatpak override --user --env=MANGOHUD=1 com.valvesoftware.Steam
+flatpak override --user --env=PROTON_ENABLE_WAYLAND=1 com.valvesoftware.Steam
+flatpak override --user --env=PROTON_ENABLE_HDR=1 com.valvesoftware.Steam
+flatpak override --user --env=PROTON_FSR4_UPGRADE=1 com.valvesoftware.Steam
+flatpak override --user --env=PROTON_FSR4_RDNA3_UPGRADE=1 com.valvesoftware.Steam
+flatpak override --user --filesystem=xdg-config/MangoHud:ro com.valvesoftware.Steam
+
+{{- else }}
+echo "Skipped gaming setup in non-home profile"
+{{- end }}
